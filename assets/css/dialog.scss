@@ -1,0 +1,321 @@
+@import './base.scss';
+$baseColor:#3390ff;
+
+ul{
+	padding:0;
+	margin: 0;
+	li{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.zmiti-dialog-main-ui {
+
+	*{
+		font-family: "Helvetica Neue", 'Helvetica', "Microsoft YaHei", arial, sans-serif !important;
+		font-size:14px;
+	}
+
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, .5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 100;
+	&.hide{
+		z-index: -1;
+		opacity:0;
+	}
+	h2,h3{
+		font-weight: normal;
+		font-size:20px;
+	}
+	h2.zmiti-title{
+		text-align: center;
+		color:$baseColor;
+		
+	}
+	.zmiti-login-C{
+		width: 80%;
+		margin: 80px auto;
+		text-align: center;
+		color:$baseColor;
+
+	/* 	@include transition(1s);
+
+		&.hide{
+			opacity: 0;
+		} */
+
+		.zmiti-icon{
+			width: 100px;
+			height: 100px;
+			@include br();
+			background:rgba(51,144,255,.1);
+			margin: 20px auto 40px;
+
+		}
+
+		.zmiti-login-form{
+			width: 100%;
+			background:#fff;
+			padding-bottom: 20px;
+			h3{
+				border-top: 4px solid $baseColor;
+				text-align: center;
+				height: 40px;
+				line-height: 40px;
+				font-size:14px;
+				
+			}
+			.zmiti-login-input{
+				margin: 0 auto 10px;
+
+				width: 90%;
+				input{
+					height: 36px;
+					line-height: 36px;
+					border:1px solid #eee;
+					width: 80%;
+					padding-left: 10px;
+					&::-webkit-input-placeholder{
+						color:#eee;
+					}
+					outline: none;
+					&:-webkit-autofill { 
+						box-shadow: 0 0 0px 1000px white inset !important;
+					}
+					
+				}
+			}
+			.zmiti-login-btn{
+				width:120px;
+				height: 36px;
+				line-height: 36px;
+				text-align: center;
+				color:#fff;
+				background: $baseColor;
+				@include br(4px);
+				margin: 40px auto 0;
+				cursor: pointer;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+		}
+
+	}
+
+	.zmiti-company-list{
+		margin: 80px auto;
+		width: 80%;
+		li{
+			height: 70px;
+			background: #fff;
+			margin: 10px 0;
+			line-height: 70px;
+			@include pos(r);
+			cursor: pointer;
+			span{
+				margin-left: 3em;;
+			}
+			&:hover{
+				label{
+					
+
+					&:nth-of-type(2){
+						
+						background:rgba(51,144,255,1);
+						&::before{
+							border:2px solid #fff;
+							border-left: none;
+							border-bottom: none;
+						}
+					}
+				}
+			}
+			label{
+				@include pos(a);
+				width: 4px;
+				height: 100%;
+				left: 0;
+				top: 0;
+				background:$baseColor;
+
+				&:nth-of-type(2){
+					width: 40px;
+					height: 40px;
+					@include br();
+					right: 30px;
+					top: 15px;
+					background:rgba(51,144,255,.1);
+					left:auto;
+
+					&::before{
+						content:"";
+						@include pos(a);
+						@include transition(.2s);
+						width: 24%;
+						height: 24%;
+						border:2px solid $baseColor;
+						@include transform(rotate(45deg));
+						border-left: none;
+						border-bottom: none;
+						top: 37%;
+						left: 30%;
+					}
+				}
+			}
+		}
+	}
+
+	.zmiti-get-ui{
+		margin: 80px auto;
+		width: 80%;
+		.zmiti-preview{
+			background-image: url(chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/phone.png);
+			width:360px;
+			height:648px;
+			margin: 0 auto;
+			@include pos(r);
+		}
+
+		.zmiti-preview-content{
+			width: 90%;
+			height: 570px;
+			@include pos(a);
+			left: 4.5%;
+			top:5%;;
+			overflow:auto;
+			h2{
+				width:90%;
+				margin: 20px auto;
+			}
+			.zmiti-article-date{
+				width: 90%;
+				margin: 0 auto;
+				@include displayFlex(row);
+				justify-content: space-between;
+				font-size:12px;
+				border-bottom: 1px solid #ccc;
+				padding-bottom: 10px;
+			}
+			.zmiti-article-remark{
+				width:90%;
+				background:rgba(163,205,255,0.15);
+				margin: 20px auto;
+				font-size:14px;
+				line-height: 24px;
+				padding:10px;
+				box-sizing: border-box;
+			}
+			.zmiti-article-content{
+				width: 90%;
+				margin: 0 auto;
+				font-size:14px;
+				line-height: 24px;;
+				img{
+					width: auto;
+					height: auto;
+					max-width:100%;
+					max-height:100%;
+				}
+			}
+		}
+	}
+
+	.zmiti-index-ui{
+		margin: 80px auto;
+		width: 80%;
+		.zmiti-function-list{
+			width: 90%;
+			margin: 0 auto;
+			ul{
+				@include displayFlex(row);
+				flex-wrap: wrap;
+				justify-content:space-between;
+				@include  pos(r);
+				&:before{
+					content:"";
+					@include pos(a);
+					width: 100%;
+					height: 4px;
+					background: $baseColor;
+					left: 0;
+					top:0;
+				}
+			}
+			li{
+				width: 32%;
+				height: 140px;
+				background: #fff;
+				margin: 3px 0;
+				
+				
+			}
+		}
+	}
+}
+#zmiti-main-content{
+	width: 500px;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top:0;
+	background: #f4f9ff;
+}
+#zmiti-dialog-close{
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size:30px;
+	cursor: pointer;
+	position:absolute;
+	top:0;
+	right:0;
+}
+@font-face {
+		font-family: 'zmt_iconfont';
+		src:url('chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.eot?hkkay8');
+		src:url('chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.eot?hkkay8#iefix') format('embedded-opentype'),
+			url('chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.ttf?hkkay8') format('truetype'),
+			url('chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.woff?hkkay8') format('woff'),
+			url('chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.svg?hkkay8#iconfont') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+.zmt_iconfont {
+	font-family: "zmt_iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.zmiti-scroll::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
+}
+
+.ivu-table-body::-webkit-scrollbar-thumb,
+.zmiti-scroll::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ivu-table-body::-webkit-scrollbar-track,
+.zmiti-scroll::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
