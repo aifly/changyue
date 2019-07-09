@@ -1,0 +1,346 @@
+{
+  "getret": 0,
+  "getmsg": "",
+  "list": [
+    {
+      "employeeid": "62ab5b31-64e1-11e8-a9e7-00163e43810f",
+      "realname": "邓植尹",
+      "username": "邓植尹",
+      "departmentid": "1000000001",
+      "roleid": "1000000002",
+      "rolename": "主任",
+      "levelnum": 2,
+      "departmentname": "编辑部"
+    },
+    {
+      "employeeid": "62ab5b31-64e1-11e8-a9e7-00163e03810f",
+      "realname": "张其胜",
+      "username": "张其胜",
+      "departmentid": "1000000001",
+      "roleid": "1000000002",
+      "rolename": "主任",
+      "levelnum": 2,
+      "departmentname": "编辑部"
+    },
+    {
+      "employeeid": "71675a8e-64e5-11e8-a9e7-00163e03810f",
+      "realname": "姚杰",
+      "username": "姚杰",
+      "departmentid": "1000000002",
+      "roleid": "1000000002",
+      "rolename": "主任",
+      "levelnum": 2,
+      "departmentname": "宣传活动部"
+    },
+    {
+      "employeeid": "c5ec45fc-64e4-11e8-a9e7-00163e03810f",
+      "realname": "王晓宁",
+      "username": "王晓宁",
+      "departmentid": "1000000006",
+      "roleid": "1000000003",
+      "rolename": "组长",
+      "levelnum": 3,
+      "departmentname": "新媒体组"
+    },
+    {
+      "employeeid": "e3f23b56-64e1-11e8-a9e7-00163e03810f",
+      "realname": "胡杨",
+      "username": "胡杨",
+      "departmentid": "1000000004",
+      "roleid": "1000000003",
+      "rolename": "组长",
+      "levelnum": 3,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "8a4069c0-64e5-11e8-a9e7-00163e03810f",
+      "realname": "张青玲",
+      "username": "张青玲",
+      "departmentid": "1000000007",
+      "roleid": "1000000003",
+      "rolename": "组长",
+      "levelnum": 3,
+      "departmentname": "身边好人活动组"
+    },
+    {
+      "employeeid": "421aa928-64e4-11e8-a9e7-00163e03810f",
+      "realname": "刘鲲鹏",
+      "username": "刘鲲鹏",
+      "departmentid": "1000000005",
+      "roleid": "1000000003",
+      "rolename": "组长",
+      "levelnum": 3,
+      "departmentname": "音视频组"
+    },
+    {
+      "employeeid": "e810e2d9-64e5-11e8-a9e7-00163e03810f",
+      "realname": "路弘",
+      "username": "路弘",
+      "departmentid": "1000000008",
+      "roleid": "1000000003",
+      "rolename": "组长",
+      "levelnum": 3,
+      "departmentname": "网络文明传播组"
+    },
+    {
+      "employeeid": "218c8a25-64e6-11e8-a9e7-00163e03810f",
+      "realname": "原茵",
+      "username": "原茵",
+      "departmentid": "1000000009",
+      "roleid": "1000000003",
+      "rolename": "组长",
+      "levelnum": 3,
+      "departmentname": "网络公益组"
+    },
+    {
+      "employeeid": "1260d45e-64e4-11e8-a9e7-00163e03810f",
+      "realname": "张殊凡",
+      "username": "张殊凡",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "c12af6a8-64e5-11e8-a9e7-00163e03810f",
+      "realname": "王楠",
+      "username": "王楠",
+      "departmentid": "1000000007",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "身边好人活动组"
+    },
+    {
+      "employeeid": "40d2ce4e-64e6-11e8-a9e7-00163e03810f",
+      "realname": "贺子桓",
+      "username": "贺子桓",
+      "departmentid": "1000000009",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "网络公益组"
+    },
+    {
+      "employeeid": "28805f08-64e4-11e8-a9e7-00163e03810f",
+      "realname": "朱丽晨",
+      "username": "朱丽晨",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "d69fc0af-64e5-11e8-a9e7-00163e03810f",
+      "realname": "荣毅",
+      "username": "荣毅",
+      "departmentid": "1000000007",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "身边好人活动组"
+    },
+    {
+      "employeeid": "e4df2036-64e4-11e8-a9e7-00163e03810f",
+      "realname": "王爽",
+      "username": "王爽",
+      "departmentid": "1000000006",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "新媒体组"
+    },
+    {
+      "employeeid": "883a4bf7-64e4-11e8-a9e7-00163e03810f",
+      "realname": "党建",
+      "username": "党建",
+      "departmentid": "1000000005",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "音视频组"
+    },
+    {
+      "employeeid": "f94d8f76-64e5-11e8-a9e7-00163e03810f",
+      "realname": "项丽",
+      "username": "项丽",
+      "departmentid": "1000000008",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "网络文明传播组"
+    },
+    {
+      "employeeid": "02af53b5-64e5-11e8-a9e7-00163e03810f",
+      "realname": "王文宇",
+      "username": "王文宇",
+      "departmentid": "1000000006",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "新媒体组"
+    },
+    {
+      "employeeid": "75d0bf84-64e2-11e8-a9e7-00163e03810f",
+      "realname": "张慧磊",
+      "username": "张慧磊",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "a10980a6-64e4-11e8-a9e7-00163e03810f",
+      "realname": "毛丹",
+      "username": "毛丹",
+      "departmentid": "1000000005",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "音视频组"
+    },
+    {
+      "employeeid": "14b20618-64e6-11e8-a9e7-00163e03810f",
+      "realname": "梁海燕",
+      "username": "梁海燕",
+      "departmentid": "1000000008",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "网络文明传播组"
+    },
+    {
+      "employeeid": "06386f55-64e4-11e8-a9e7-00163e03810f",
+      "realname": "杨学静",
+      "username": "杨学静",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "b7dda2cf-64e4-11e8-a9e7-00163e03810f",
+      "realname": "高晟寒",
+      "username": "高晟寒",
+      "departmentid": "1000000005",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "音视频组"
+    },
+    {
+      "employeeid": "3485c475-64e6-11e8-a9e7-00163e03810f",
+      "realname": "刘冰",
+      "username": "刘冰",
+      "departmentid": "1000000009",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "网络公益组"
+    },
+    {
+      "employeeid": "1df9f8ef-64e4-11e8-a9e7-00163e03810f",
+      "realname": "段琳玉",
+      "username": "段琳玉",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "cceea049-64e5-11e8-a9e7-00163e03810f",
+      "realname": "陶恒",
+      "username": "陶恒",
+      "departmentid": "1000000007",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "身边好人活动组"
+    },
+    {
+      "employeeid": "d5b887d9-64e4-11e8-a9e7-00163e03810f",
+      "realname": "王一冲",
+      "username": "王一冲",
+      "departmentid": "1000000006",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "新媒体组"
+    },
+    {
+      "employeeid": "f67867a4-64e4-11e8-a9e7-00163e03810f",
+      "realname": "王钰",
+      "username": "王钰",
+      "departmentid": "1000000006",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "新媒体组"
+    },
+    {
+      "employeeid": "4ea61d3f-64e2-11e8-a9e7-00163e03810f",
+      "realname": "王小伟",
+      "username": "王小伟",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "947875e4-64e4-11e8-a9e7-00163e03810f",
+      "realname": "赵洋",
+      "username": "赵洋",
+      "departmentid": "1000000005",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "音视频组"
+    },
+    {
+      "employeeid": "06a9b4ba-64e6-11e8-a9e7-00163e03810f",
+      "realname": "桑小婷",
+      "username": "桑小婷",
+      "departmentid": "1000000008",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "网络文明传播组"
+    },
+    {
+      "employeeid": "975f2eb5-64e2-11e8-a9e7-00163e03810f",
+      "realname": "贾玉韬",
+      "username": "贾玉韬",
+      "departmentid": "1000000004",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "综合新闻组"
+    },
+    {
+      "employeeid": "0ecfb8f2-64e5-11e8-a9e7-00163e03810f",
+      "realname": "赵彬宇",
+      "username": "赵彬宇",
+      "departmentid": "1000000006",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "新媒体组"
+    },
+    {
+      "employeeid": "abc62aa4-64e4-11e8-a9e7-00163e03810f",
+      "realname": "林和",
+      "username": "林和",
+      "departmentid": "1000000005",
+      "roleid": "1000000004",
+      "rolename": "员工",
+      "levelnum": 4,
+      "departmentname": "音视频组"
+    }
+  ]
+}

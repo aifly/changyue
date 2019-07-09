@@ -1,0 +1,65 @@
+﻿@import "../css/base.scss";
+ $baseColor:#3390ff;
+  .zmiti-login-C{
+		width: 80%;
+		margin: 80px auto;
+		text-align: center;
+		color:$baseColor;
+		.zmiti-icon{
+			width: 100px;
+			height: 100px;
+			@include br();
+			background:rgba(51,144,255,.1);
+			margin: 20px auto 40px;
+
+		}
+		
+		
+		.zmiti-login-form{
+			width: 100%;
+			background:#fff;
+			padding-bottom: 20px;
+			h3{
+				border-top: 4px solid $baseColor;
+				text-align: center;
+				height: 40px;
+				line-height: 40px;
+				font-size:14px;
+				
+			}
+			.zmiti-login-input{
+				margin: 0 auto 10px;
+
+				width: 90%;
+				input{
+					height: 36px;
+					line-height: 36px;
+					border:1px solid #eee;
+					width: 80%;
+					padding-left: 10px;
+					&::-webkit-input-placeholder{
+						color:#eee;
+					}
+					outline: none;
+					&:-webkit-autofill { 
+						box-shadow: 0 0 0px 1000px white inset !important;
+					}
+					
+				}
+			}
+			.zmiti-login-btn{
+				width:120px;
+				height: 36px;
+				line-height: 36px;
+				text-align: center;
+				color:#fff;
+				background: $baseColor;
+				@include br(4px);
+				margin: 40px auto 0;
+				cursor: pointer;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+		}
+
+	}

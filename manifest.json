@@ -38,7 +38,7 @@
 
 			"matches": ["http://172.27.2.167/wcm/app/document/*"],
 
-			"js": ["./assets/js/jquery.min.js", "./assets/js/plugin.js"],
+			"js": ["./assets/js/jquery.min.js", "./assets/js/app.js"],
 			"css":["./assets/css/dialog.css"],
 			"run_at": "document_end",
 

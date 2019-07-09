@@ -1,0 +1,241 @@
+/*.ant-btn:focus, .ant-btn:hover,.ant-input:focus, .ant-input:hover {
+    background-color: #fff;
+    border-color: #bf1616;
+    box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
+}*/
+.zmiti-admin-main-ui {
+  background: #f2f2f2;
+  box-sizing: border-box;
+  height: 100%;
+  width: 99%;
+  margin: 0 auto;
+}
+
+.zmiti-admin-main-ui .zmiti-avatar-list {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row;
+}
+
+.zmiti-admin-main-ui .zmiti-avatar-list span {
+  font-size: 40px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.zmiti-admin-main-ui .zmiti-avatar-list span.active {
+  color: #3390ff;
+}
+
+.zmiti-admin-main-ui .ivu-table-wrapper {
+  border-bottom: none;
+  border-right: none;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main {
+  box-sizing: border-box;
+  background: #fff;
+  margin: 0 auto;
+  flex: 2;
+  -webkit-flex: 2;
+  position: relative;
+  top: 5px;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  box-shadow: 0 0 0 1px #ccc;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main .zmiti-add-form-close {
+  z-index: 100;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main > div {
+  margin: 10px auto 10px;
+  position: relative;
+  flex: 1;
+  -webkit-flex: 1;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main > div .zmiti-meet-form {
+  width: 100%;
+  margin: 0px auto;
+  padding: 20px 40px;
+  height: 600px;
+  overflow: auto;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main .zmiti-list-where {
+  width: 98%;
+  margin: 10px auto 0;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  position: relative;
+  z-index: 10;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main .zmiti-list-where input {
+  height: 30px;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main .zmiti-admin-main {
+  flex: 5;
+  -webkit-flex: 5;
+  width: 100%;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main .zmiti-admin-main > div {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.zmiti-admin-main-ui .zmiti-list-main .zmiti-admin-main .zmiti-admin-table {
+  width: 98%;
+  margin: 0 auto;
+}
+
+.zmiti-admin-main-ui .lt-full {
+  position: fixed !important;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.zmiti-admin-main-ui .lt-full .zmiti-left-pannel {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form {
+  flex: 1;
+  -webkit-flex: 1;
+  width: 500px;
+  overflow: auto;
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 0 0 1px #ccc;
+  box-sizing: border-box;
+  background: #f9f9f9;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-safe-content {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-top: 30px;
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+  border: 1px dashed #ccc;
+  padding: 10px 0;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-safe-content > div:nth-of-type(1) {
+  text-align: center;
+  width: 120px;
+  font-weight: bold;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-safe-content > div:nth-of-type(2) {
+  flex: 1;
+  -webkit-flex: 1;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-safe-content > div:nth-of-type(3) {
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+  color: #0066cc;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form.detail-enter-active, .zmiti-admin-main-ui .zmiti-add-form.detail-leave-active {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form.detail-enter, .zmiti-admin-main-ui .zmiti-add-form.detail-leave-to {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-admin-avatar {
+  background: rgba(51, 144, 255, 0.1);
+  border-radius: 50%;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  margin: 0 auto 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-admin-avatar label {
+  position: absolute;
+  bottom: -50px;
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  left: 0;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-admin-avatar span {
+  font-size: 40px;
+  color: rgba(51, 144, 255, 0.8);
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-add-form-C {
+  margin: 10px auto 2px;
+  width: 90%;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-add-form-item {
+  line-height: 50px;
+  height: 50px;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-add-form-item.zmiti-add-btns {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-add-form-item.zmiti-add-btns button {
+  margin: 0 20px;
+  padding: 2px 20px;
+}
+
+.zmiti-admin-main-ui .zmiti-add-form .zmiti-add-form-item input {
+  padding-left: 6px;
+  height: 32px;
+  width: 70%;
+  border: 1px solid #d8d8d8;
+  outline: none;
+}
+
+.ivu-icon-ios-help-circle {
+  left: 25px;
+}
+
+.ivu-radio-inner:after {
+  border-radius: 10px !important;
+}

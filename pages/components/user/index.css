@@ -1,0 +1,167 @@
+/*.ant-btn:focus, .ant-btn:hover,.ant-input:focus, .ant-input:hover {
+    background-color: #fff;
+    border-color: #bf1616;
+    box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
+}*/
+.lt-full {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.zmiti-text-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+}
+
+.zmiti-play {
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  position: fixed;
+  z-index: 1000;
+  right: .5rem;
+  top: .5rem;
+}
+
+.zmiti-play.rotate {
+  -webkit-animation: rotate 5s linear infinite;
+  animation: rotate 5s linear infinite;
+}
+
+.symbin-left {
+  float: left !important;
+}
+
+.symbin-right {
+  float: right !important;
+}
+
+@-webkit-keyframes rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.wm-user-ui {
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column;
+}
+
+.wm-user-ui > div {
+  flex-grow: 1;
+  width: 97%;
+  margin: 10px auto;
+}
+
+.wm-user-ui > header {
+  background: #fff;
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+}
+
+.wm-user-ui > header > div {
+  font-size: 20px;
+  margin-left: 40px;
+  position: relative;
+}
+
+.wm-user-ui > header > div:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: #cc0000;
+  top: 15px;
+  left: -10px;
+}
+
+.wm-user-ui .wm-user-center {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.wm-user-ui .wm-user-form-item {
+  background: #eeeeee;
+  width: 400px;
+  border-radius: 4px;
+  padding: 0 20px;
+  height: 50px;
+  margin: 4px 0;
+  line-height: 50px;
+  position: relative;
+}
+
+.wm-user-ui .wm-user-form-item button {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+.wm-user-ui .wm-user-form-item.wm-require label {
+  position: relative;
+}
+
+.wm-user-ui .wm-user-form-item.wm-require label:before {
+  content: '*';
+  position: absolute;
+  color: #be0000;
+  font-size: 20px;
+  left: -40px;
+}
+
+.wm-user-ui .wm-user-form-item .ivu-cascader {
+  position: absolute;
+  z-index: 10;
+  right: 20px;
+  top: 10px;
+}
+
+.wm-user-ui .wm-user-form-item .ivu-cascader input {
+  outline: none;
+}
+
+.wm-user-ui .wm-user-form-item .wm-user-error {
+  position: absolute;
+  color: #ff0000;
+  left: 102%;
+  z-index: 1;
+  top: 0;
+  min-width: 150px;
+}
+
+.wm-user-ui .wm-user-form-item input {
+  outline: none;
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 0;
+  height: 30px;
+  width: 300px;
+  border: none;
+}
+
+.wm-user-ui .wx-reg-btn {
+  margin-top: 20px;
+  background: #fab82e;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}

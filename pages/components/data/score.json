@@ -1,0 +1,47 @@
+{
+    "getret":0,
+    "getmsg":"",
+    "list":[
+        {
+            "date":"2018年1月",
+            "checkitemlist":[
+                {
+                    "title": "工作目标",
+                    "checkitemid": "1747986010"
+                }, {
+                    "title": "责任心",
+                    "checkitemid": "1944808708"
+                }, {
+                    "title": "执行力",
+                    "checkitemid": "1673085817"
+                }
+            ],
+            "score1747986010": 89,
+            "score1944808708": 91,
+            "score1673085817": 80,
+            "avgscore": 90
+        },
+        {
+            "date": "2018年1月",
+            "checkitemlist": [
+                {
+                    "title": "工作目标",
+                    "checkitemid": "1747986010"
+                },
+                {
+                    "title": "责任心",
+                    "checkitemid": "1944808708"
+                },
+                {
+                    "title": "执行力",
+                    "checkitemid": "1673085817"
+                }
+            ],
+            "score1747986010": 89,
+            "score1944808708": 91,
+            "score1673085817": 80,
+            "avgscore": 80
+        }
+    ]
+}
+

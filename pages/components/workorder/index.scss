@@ -1,0 +1,63 @@
+﻿@import "../css/base.scss";
+
+$baseColor: #fcffb4;
+$viewW: 750px;
+$color: #be0000;
+
+
+.zmiti-workorder-main-ui{
+	background:#fff;
+	padding: 10px;
+
+	.zmiti-workorder-choose{
+		width: 100%;
+		border:1px solid #ccc;
+		margin-top: 10px;
+		padding: 10px;
+		padding-bottom: 20px;
+		.zmiti-workorder-header-bar{
+			text-indent: 1em;
+			font-size:14px;
+			@include pos(r);
+			height: 40px;
+			border:1px solid #f5f6fa;
+			background:#f5f6fa;
+			line-height: 40px;
+			&:before{
+				content:'';
+				left: 0;
+				top:0;
+				height: 100%;
+				width: 4px;
+				background: #333;
+				@include pos(a);
+			}
+
+		}
+
+		&>ul{
+			margin-top: 30px;
+			@include displayFlex(row);
+			justify-content: space-between;
+			-webkit-justify-content: space-between;
+
+			li{margin: 0 10px;}
+
+			.zmiti-workerorder-type-top{
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				@include displayFlex(row);
+				line-height: 50px;
+				padding: 0;
+				&.zmiti-workerorder-type-top1{
+					padding: 0 20px;
+					box-sizing: border-box;
+					min-width: 250px;
+				}
+
+			}
+		}
+	}
+	 
+}

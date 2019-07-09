@@ -1,0 +1,126 @@
+﻿@import "../css/base.scss";
+
+$baseColor: #fcffb4;
+$viewW: 750px;
+$color: #be0000;
+
+.wm-user-ui{
+
+    height: 100%;
+   
+    & > div {
+        flex-grow: 1;
+        width: 97%;
+        margin: 10px auto;
+
+        
+    }
+
+    @include displayFlex(column);
+
+    & > header {
+        background: #fff;
+        height: 50px;
+        width: 100%;
+        line-height: 50px;
+
+        & > div {
+            font-size: 20px;
+            margin-left: 40px;
+
+            @include pos(r);
+
+            &:before {
+                content: "";
+
+                @include pos(a);
+
+                width: 2px;
+                height: 20px;
+                background: #cc0000;
+                top: 15px;
+                left: -10px;
+            }
+        }
+    }
+
+    .wm-user-center{
+        -webkit-flex-grow:1;
+        flex-grow:1;
+        height: 100%;
+        @include displayFlex(row);
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items:center;
+        align-items:center;
+    }
+
+    .wm-user-form-item{
+        background:#eeeeee;
+        width: 400px;
+        @include br(4px);
+        padding: 0 20px;
+        height: 50px;
+        margin: 4px 0;
+        line-height: 50px;
+        
+        button{
+            @include pos(a);
+            right: 10px;
+            top: 8px;
+        };
+        &.wm-require {
+            label {
+                @include pos(r);
+                &:before {
+                    content: '*';
+                    @include pos(a);
+                    color: #be0000;
+                    font-size: 20px;
+                    left: -40px;
+                }
+            }
+        }
+
+        .ivu-cascader {
+            @include pos(a);
+            z-index: 10;
+            right: 20px;
+            top: 10px;
+            input {
+                outline: none;
+            }
+        }
+
+        @include pos(r);
+        .wm-user-error {
+            @include pos(a);
+            color: #ff0000;
+            left: 102%;
+            z-index: 1;
+            top: 0;
+            min-width: 150px;
+        }
+
+        input {
+            outline: none;
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 0;
+            height: 30px;
+            width: 300px;
+            border: none;
+        }
+    }
+
+    .wx-reg-btn {
+        margin-top: 20px;
+        background: #fab82e;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+    }
+}
+
+ 

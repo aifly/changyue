@@ -1,0 +1,13 @@
+@import "../css/base.scss";
+
+ .zmiti-avatar-list{
+	  @include displayFlex(row);
+	  span{
+		  font-size:40px;
+		  margin-right: 20px;
+		  cursor: pointer;
+		  &.active{
+			  color:#3390ff;
+		  }
+	  }
+  }

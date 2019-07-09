@@ -1,0 +1,17 @@
+
+
+{
+    "getret":0,
+    "getmsg":"登录成功",
+    "userinfo":{
+        "username":"xuchang",
+        "usermobile":"15718879215",
+        "userrealname":"徐畅",
+        "usersex":"男",
+        "departmentid":"1",
+        "departmentname":"编辑部",
+        "userjobid":"1",
+        "userjob":"主任",
+        "userhead":"用户头像地址(绝对地址)"
+    }
+}

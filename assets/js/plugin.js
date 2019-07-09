@@ -18,49 +18,6 @@ var zmitiUtil = {
 		this.laout(request, zmitiObj);
 		 
 	},
-	notify(){
-		Notification.requestPermission(function (result) {
-			//result 默认值'default'等同于拒绝 'denied' -用户选择了拒绝 'granted' -用户同意启用通知
-			if ("granted" != result) {
-				alert('请授权浏览器能够进行通知!');
-				return false;
-			} else {
-				var tag = "sds" + Math.random();
-				var notify = new Notification(
-					'aaaaaa',
-					{
-						dir: 'auto',
-						lang: 'zh-CN',
-						tag: tag,//实例化的notification的id
-						icon: imgUrl,//通知的缩略图,icon 支持ico、png、jpg、jpeg格式
-						body: 'aaaaaaa' //通知的具体内容
-					}
-				);
-				// 定义通知窗口点击函数
-				notify.onclick = function () {
-					//如果通知消息被点击,通知窗口将被激活
-					window.focus();
-				};
-				// 定义通知错误事件
-				notify.onerror = function () {
-					// console.log("");
-				};
-				// 定义通知显示事件 可以设置多少秒之后关闭 也可以不设置关闭
-				notify.onshow = function () {
-					// 窗口显示 播放音频
-					// 窗口显示3S后关闭
-					setTimeout(function () {
-						notify.close();
-					}, 3000);
-				};
-				// 定义通知关闭事件
-				notify.onclose = function () {
-
-				};
-			}
-		});
-
-	},
 	login(fn){
 		//用户登录
 		$('.zmiti-login-btn').on('click', () => {
@@ -172,10 +129,11 @@ var zmitiUtil = {
 			//单位选择点击事件
 			var s = this;
 			$('#zmiti-company-list li').on('click', e => {
-				chrome.extension.sendRequest({ type: 'get' }, function (response) {
+				chrome.extension.sendRequest({ type: 'index' }, function (response) {
 					
 					$('#zmiti-main-replace').html(response.data);
-					s.fillActicle();
+
+					
 					
 				});
 			})

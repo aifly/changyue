@@ -1,0 +1,67 @@
+/*.ant-btn:focus, .ant-btn:hover,.ant-input:focus, .ant-input:hover {
+    background-color: #fff;
+    border-color: #bf1616;
+    box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
+}*/
+.zmiti-workorder-main-ui {
+  background: #fff;
+  padding: 10px;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose {
+  width: 100%;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose .zmiti-workorder-header-bar {
+  text-indent: 1em;
+  font-size: 14px;
+  position: relative;
+  height: 40px;
+  border: 1px solid #f5f6fa;
+  background: #f5f6fa;
+  line-height: 40px;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose .zmiti-workorder-header-bar:before {
+  content: '';
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #333;
+  position: absolute;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose > ul {
+  margin-top: 30px;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose > ul li {
+  margin: 0 10px;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose > ul .zmiti-workerorder-type-top {
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row;
+  line-height: 50px;
+  padding: 0;
+}
+
+.zmiti-workorder-main-ui .zmiti-workorder-choose > ul .zmiti-workerorder-type-top.zmiti-workerorder-type-top1 {
+  padding: 0 20px;
+  box-sizing: border-box;
+  min-width: 250px;
+}

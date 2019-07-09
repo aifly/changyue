@@ -1,0 +1,65 @@
+﻿@import "../css/base.scss";
+
+$baseColor:#3390ff;
+
+.zmiti-company-main-ui{
+	margin: 80px auto;
+	width: 80%;
+	left:10%;
+	li{
+		height: 70px;
+		background: #fff;
+		margin: 10px 0;
+		line-height: 70px;
+		@include pos(r);
+		cursor: pointer;
+		span{
+			margin-left: 3em;;
+		}
+		&:hover{
+			label{
+				&:nth-of-type(2){
+					background:rgba(51,144,255,1);
+					&::before{
+						border:2px solid #fff;
+						border-left: none;
+						border-bottom: none;
+					}
+				}
+			}
+		}
+		label{
+			@include pos(a);
+			width: 4px;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background:$baseColor;
+
+			&:nth-of-type(2){
+				width: 40px;
+				height: 40px;
+				@include br();
+				right: 30px;
+				top: 15px;
+				background:rgba(51,144,255,.1);
+				left:auto;
+
+				&::before{
+					content:"";
+					@include pos(a);
+					@include transition(.2s);
+					width: 24%;
+					height: 24%;
+					border:2px solid $baseColor;
+					@include transform(rotate(45deg));
+					border-left: none;
+					border-bottom: none;
+					top: 37%;
+					left: 30%;
+				}
+			}
+		}
+	}
+}
+
