@@ -3,8 +3,12 @@
 		<h2 class='zmiti-title'>功能选择</h2>
 		<div class='zmiti-function-list'>
 			<ul>
-				<li></li>
-				<li></li>
+				<li>
+					<div class='zmt_iconfont'>&#xe609;</div>
+				</li>
+				<li class='zmt_iconfont'>
+					<div class='zmt_iconfont'>&#xe60c;</div>
+				</li>
 				<li></li>
 				<li></li>
 				<li></li>

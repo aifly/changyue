@@ -1,7 +1,7 @@
 <template>
     <div class='zmiti-changyue-main-ui lt-full'>
 		<div class='zmiti-changyue-main'>
-				<div class='zmiti-dialog-close'>
+				<div class='zmiti-dialog-close' @click='closeAll'>
 					&times;
 				</div>
         	<router-view></router-view>
@@ -62,10 +62,9 @@
              
         },
 		methods:{
-			 
-           
-         
-          
+			closeAll(){//移除整个插件~~~
+				document.body.removeChild($('#app1')[0]);
+			}
 		}
 	}
 </script>

@@ -43,6 +43,11 @@
 		beforeCreate(){
 			 
 		},
+		mounted() {
+			if(this.username && this.password){
+				this.login();
+			}
+		},
 		
 		methods:{
 			login(){

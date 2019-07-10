@@ -174,3 +174,21 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 	
 });
+
+
+
+
+`
+	由于互联网上有很多有关于threejs的入门教程，我这里也是入门级的，但是我会深入源代码去分析其核心功能的实现原理。
+	所以我希望在看此文章的你：
+
+	1、熟练掌握js基础，尤其是面向对象
+	2、有一些threejs的基础
+	3、有大概了解过原生的webgl（不太明白的可以去看一下我前几篇关于wegbl的文章）
+
+	几乎所有的threejs基础都会教你怎么去生成一个立方体，然后在那转来转去的。那么接下来我们也实现一个，然后再去分析其源码
+
+
+
+
+`
