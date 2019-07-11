@@ -4,31 +4,20 @@
 			<div class='zmiti-checkuser-list  zmiti-scroll'>
 				<h3>已选审核人：</h3>
 				<ul class='zmiti-has-checked'>
-					<li title='点击移除'>徐畅徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
-					<li title='点击移除'>徐畅</li>
+					<li v-for='(user,i) of checkedUser' :key="i" title='点击移除'>
+						{{user.username}}
+					</li>
 				</ul>
 				<h3>未选审核人：</h3>
-				
-				<ul class='zmiti-has-unchecked'>
-					<li title='点击选择'>徐畅徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-					<li title='点击选择'>徐畅</li>
-				</ul>
+				<div v-for='(checkuser,i) of checkuserList' :key="i">
+					<h3>{{checkuser.departmentname}}</h3>
+					<ul class='zmiti-has-unchecked'>
+						<li v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
+							{{item.username}}
+						</li>
+						
+					</ul>
+				</div>
 			</div>
 	</div>
 </template>
@@ -48,7 +37,45 @@
 		name:'zmitiindex',
 		data(){
 			return{
-				company_list:[]
+				company_list:[],
+				checkedUser:[
+					{
+						userid:1,
+						username:'徐畅'
+					}
+				],
+				checkuserList:[
+					{
+						departmentname:'宣传部',
+						list:[
+							{
+								userid:1,
+								username:'徐畅'
+							},{
+								userid:1,
+								username:'徐畅'
+							},{
+								userid:1,
+								username:'徐畅'
+							}
+						]
+					},
+					{
+						departmentname:'组织部',
+						list:[
+							{
+								userid:1,
+								username:'徐畅'
+							},{
+								userid:1,
+								username:'徐畅'
+							},{
+								userid:1,
+								username:'徐畅'
+							}
+						]
+					}
+				]
 			}
 		},
 		components:{
