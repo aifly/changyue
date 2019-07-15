@@ -32,7 +32,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: 100;
+  z-index: 999;
 }
 
 .zmiti-changyue-main-ui.hide {
@@ -58,6 +58,35 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.zmiti-changyue-main-ui .zmiti-msg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+}
+
+.zmiti-changyue-main-ui .zmiti-msg.zmiti-err-msg {
+  background: #b10000;
+}
+
+.zmiti-changyue-main-ui .zmiti-msg.zmiti-success-msg {
+  background: yellowgreen;
+}
+
+.zmiti-changyue-main-ui .zmiti-msg.toast-enter-active, .zmiti-changyue-main-ui .zmiti-msg.toast-leave-active {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.zmiti-changyue-main-ui .zmiti-msg.toast-enter, .zmiti-changyue-main-ui .zmiti-msg.toast-leave-to {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
 }
 
 h2, h3 {

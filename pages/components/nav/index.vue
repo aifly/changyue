@@ -4,10 +4,14 @@
 		<div class='zmiti-function-list'>
 			<ul>
 				<li>
-					<div class='zmt_iconfont'>&#xe609;</div>
+					<router-link to="index">
+						<div class='zmt_iconfont'>&#xe609;</div>
+					</router-link>
 				</li>
 				<li class='zmt_iconfont'>
-					<div class='zmt_iconfont'>&#xe60c;</div>
+					<router-link to="index">
+						<div class='zmt_iconfont'>&#xe60c;</div>
+					</router-link>
 				</li>
 				<li></li>
 				<li></li>

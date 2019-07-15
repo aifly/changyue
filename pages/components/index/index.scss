@@ -3,62 +3,292 @@
 $baseColor:#3390ff;
 
 .zmiti-index-main-ui{
-	margin: 80px auto;
-		width: 80%;
-		left:10%;
-		.zmiti-preview{
-			background-image: url(chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/phone.png);
-			width:360px;
-			height:648px;
-			margin: 0 auto;
-			@include pos(r);
+	margin: 0 auto;
+	width: 80%;
+	left:10%;
+	.zmiti-preview{
+		background-image: url(chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/phone.png);
+		width:360px;
+		height:648px;
+		margin: 0 auto;
+		@include pos(r);
+	}
+	.zmiti-preview-content{
+		width: 90%;
+		height: 570px;
+		@include pos(a);
+		left: 4.5%;
+		top:5%;;
+		overflow:auto;
+		h2{
+			width:90%;
+			margin: 20px auto;
+			font-size:20px;
+			font-weight:bold;
 		}
-		.zmiti-preview-content{
+		.zmiti-article-date{
 			width: 90%;
-			height: 570px;
-			@include pos(a);
-			left: 4.5%;
-			top:5%;;
-			overflow:auto;
-			h2{
-				width:90%;
-				margin: 20px auto;
-				font-size:20px;
-				font-weight:bold;
+			margin: 0 auto;
+			@include displayFlex(row);
+			justify-content: space-between;
+			
+			border-bottom: 1px solid #ccc;
+			padding-bottom: 10px;
+			div{
+				font-size:12px !important;
 			}
-			.zmiti-article-date{
-				width: 90%;
-				margin: 0 auto;
-				@include displayFlex(row);
-				justify-content: space-between;
-				
-				border-bottom: 1px solid #ccc;
-				padding-bottom: 10px;
-				div{
-					font-size:12px !important;
+		}
+		.zmiti-article-remark{
+			width:90%;
+			background:rgba(163,205,255,0.15);
+			margin: 20px auto;
+			font-size:14px;
+			line-height: 24px;
+			padding:10px;
+			box-sizing: border-box;
+		}
+		.zmiti-article-content{
+			width: 90%;
+			margin: 0 auto;
+			font-size:14px;
+			line-height: 24px;;
+			img{
+				width: auto;
+				height: auto;
+				max-width:100%;
+				max-height:100%;
+			}
+		}
+	}
+	@include displayFlex(column);
+	height: 100%;
+	box-sizing: border-box;
+
+	.zmiti-title{
+		height: 80px;
+		line-height: 140px;
+	}
+
+	.zmiti-back{
+		@include pos(a);
+		width: 60px;
+		height: 60px;
+		background: rgba(51,144,255,.1);
+		@include br();
+		margin: 10px 0;
+		z-index: 1;
+		cursor: pointer;
+
+		&::before{
+			content:'';
+			width: 86%;
+			height: 86%;
+			left: 7%;
+			top: 7%;
+			background: rgba(51,144,255,1);
+			@include br();
+			@include pos(a);
+			cursor: pointer;
+		}
+		&:after{
+			cursor: pointer;
+			content:"";
+			$size:14px;
+			width: $size;
+			height: $size;
+			border:2px solid #fff;
+			left: 44%;
+			top: 50%;
+			@include transform(rotate(45deg));
+			@include pos(a);
+			margin: -$size/2 0 0  -$size/2;
+			border-right: 0;
+			border-top: 0;
+		}
+	}
+	.zmiti-submit-btn{
+		width: 120px;
+		height: 40px;
+		background: $baseColor;
+		text-align: center;
+		line-height: 40px;
+		color:#fff;
+		@include br(4px);
+		margin: 20px auto;
+		cursor: pointer;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+	.zmiti-checked-userlist{
+
+		&>div{
+			background:rgba(163,205,255,.1);
+			border-bottom:1px solid rgba(163,205,255,1);
+			cursor: pointer;
+			height: 30px;
+			@include pos(r);
+			.zmiti-back{
+				width: 30px;
+				height: 30px;
+				background: rgba(51,144,255,.1);
+				@include br();
+				margin: 0;
+				right: 0;
+				z-index: 1;
+				cursor: pointer;
+
+				&::before{
+					content:'';
+					width: 86%;
+					height: 86%;
+					left: 7%;
+					top: 7%;
+					background: rgba(51,144,255,1);
+					@include br();
+					@include pos(a);
+					cursor: pointer;
+				}
+				&:after{
+					cursor: pointer;
+					content:"";
+					$size:6px;
+					width: $size;
+					height: $size;
+					border:2px solid #fff;
+					left: 34%;
+					top: 50%;
+					@include transform(rotate(-45deg));
+					@include pos(a);
+					margin: -$size/2 0 0  -$size/2;
+					border-left: 0;
+					border-top: 0;
 				}
 			}
-			.zmiti-article-remark{
-				width:90%;
-				background:rgba(163,205,255,0.15);
-				margin: 20px auto;
-				font-size:14px;
-				line-height: 24px;
-				padding:10px;
-				box-sizing: border-box;
+		}
+		ul{
+			@include displayFlex(row);
+			
+			padding: 10px;
+			@include pos(r);
+			@include pos(a);
+			
+			li{
+				margin: 0 2px;
+				@include pos(r);
+				&:before,&:after{
+					content:'';
+					@include pos(a);
+					width: 10px;
+					height: 10px;
+					background: #f00;
+					@include br();
+					right: 0;
+					top: 0;
+					@include transform(translate(50%,-50%));
+				}
+				&:after{
+					background: #fff;
+					width: 8px;
+					right: 0px;
+					z-index: 10;
+					height: 2px;
+					top: 0px;
+				}
 			}
-			.zmiti-article-content{
-				width: 90%;
-				margin: 0 auto;
+		}
+	}
+}
+
+
+.zmiti-checkuser-main-ui{
+	margin: 0px auto;
+		width: 100%;
+		flex:1;
+
+		box-sizing: border-box;
+		
+		height: 100%;
+
+		@include displayFlex(column);
+
+		.zmiti-title{
+			@include pos(r);
+			height: 100px;
+			line-height: 180px;
+			&::before{
+				content:'';
+				@include pos(a);
+				width: 100%;
+				height: 4px;;
+				background: $baseColor;
+				bottom:-18px;
+				
+				left: 0;
+			}
+		}
+		.zmiti-checkuser-list{
+			overflow: auto;
+			background: #fff;
+			flex:1;
+			@include pos(r);
+			padding: 0 10px;
+			
+			h3{
+				color:$baseColor;
 				font-size:14px;
-				line-height: 24px;;
-				img{
-					width: auto;
-					height: auto;
-					max-width:100%;
-					max-height:100%;
+			}
+			.zmiti-has-checked,.zmiti-has-unchecked{
+				@include displayFlex(row);
+				flex-wrap: wrap;
+				@include pos(r);
+				&::before{
+					content:'';
+					@include pos(a);
+					width: 100%;
+					height: 1px;
+					background: #eee;
+					bottom: 0;
+					left: 0;
+
+				}
+				li{
+					text-align: center;
+					margin:5px 10px;
+					@include pos(r);
+					cursor: pointer;
+
+					&:before,&:after{
+						content:'';
+						@include pos(a);
+						width: 10px;
+						height: 10px;
+						background: #f00;
+						@include br();
+						right: 0;
+						top: 0;
+						@include transform(translate(50%,-50%));
+					}
+					&:after{
+						background: #fff;
+						width: 8px;
+						right: 0px;
+						z-index: 10;
+						height: 2px;
+						top: 0px;
+					}
+				}
+
+			}
+			.zmiti-has-unchecked{
+				li{
+					&::before,&:after{
+						display: none;
+					}
 				}
 			}
 		}
 }
+
+
+
 

@@ -9,6 +9,7 @@ var zmitiUtil = {
 	basicConfigActions: zmitiActions.basicConfigActions,
 	weatherActions: zmitiActions.weatherActions,
 	cityActions: zmitiActions.cityActions,
+	companyAdminActions: zmitiActions.companyAdminActions,
 
 	formatDate(inputTime,flag = false){
 		var date = new Date(inputTime * 1000);

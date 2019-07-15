@@ -1,28 +1,74 @@
 <template>
 	<div class="zmiti-index-main-ui lt-full">
-		<h2 class='zmiti-title'>内容抓取</h2>
-		<div class="zmiti-preview">
-			<div class='zmiti-preview-content zmiti-scroll'>
-				<h2 class='zmiti-article-title'>
-					{{title}}
-				</h2>
-				<div class='zmiti-article-date'>
-					<div>
-						{{author + " ("+ docRelTime +") "}}
+		<div class='zmiti-back' @click="showCheckedUser = false" v-if='showCheckedUser'>
+
+		</div>
+		<template v-if='!showCheckedUser'>
+			<h2 class='zmiti-title'>内容抓取</h2>
+			<div class="zmiti-preview">
+				<div class='zmiti-preview-content zmiti-scroll'>
+					<h2 class='zmiti-article-title'>
+						{{title}}
+					</h2>
+					<div class='zmiti-article-date'>
+						<div>
+							{{author + " ("+ docRelTime +") "}}
+						</div>
+						<div>
+							{{docSourceName}}
+						</div>
 					</div>
-					<div>
-						{{docSourceName}}
+
+					<div class='zmiti-article-remark'>
+						{{desc}}
 					</div>
+					<div class='zmiti-article-content' v-html='content'>
+						
+					</div>
+				</div>
+			</div>
+
+			<div class='zmiti-checked-userlist'>
+				<h3>已选审核人：</h3>
+				<div @click="showCheckedUser = true">
+					<ul class='zmiti-has-checked'>
+						<li @click="toggleCheckUser(item,k,'remove')" v-for='(item,k) of defaultCheckedUser' :key="k" title='点击选择'>
+							{{item.username}}
+						</li>
+					</ul>
+					<div class='zmiti-back'></div>
 				</div>
 
-				<div class='zmiti-article-remark'>
-					{{desc}}
+			</div>
+			<div class='zmiti-submit-btn'  v-press @click="submitDoc">提交</div>
+		</template>
+		<template v-else>
+			<div class="zmiti-checkuser-main-ui lt-full">
+				<h2 class='zmiti-title' >审核人员名单</h2>
+				<div class='zmiti-checkuser-list  zmiti-scroll'>
+				<h3>已选审核人：</h3>
+				<div v-for='(checkuser) of checkedUser' :key="checkuser.departmentname">
+					<h3>{{checkuser.departmentname}}</h3>
+					<ul class='zmiti-has-checked'>
+						<li @click="toggleCheckUser(item,k,'remove')" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
+							{{item.username}}
+						</li>
+					</ul>
 				</div>
-				<div class='zmiti-article-content' v-html='content'>
-					
+				<hr>
+				<h3>未选审核人：</h3>
+				<div v-for='(checkuser,i) of unCheckuserList' :key="i">
+					<h3>{{checkuser.departmentname}}</h3>
+					<ul class='zmiti-has-unchecked'>
+						<li @click="toggleCheckUser(item,k,'add')" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
+							{{item.username}}
+						</li>
+						
+					</ul>
 				</div>
 			</div>
 		</div>
+		</template>
 	</div>
 </template>
 
@@ -33,15 +79,25 @@
 
 <script>
 	import zmitiUtil from '../../common/lib/util';
-	var {cityActions,weatherActions,userActions} = zmitiUtil;
+	var {cityActions,weatherActions,userActions,companyAdminActions} = zmitiUtil;
 	import Vue from 'vue';
+	
+	import '../../common/directive';
 	var json = {};
 	export default {
-		props:['obserable'],
+		props:[],
 		name:'zmitiindex',
 		data(){
 			return{
 				company_list:[],
+				checkedUser:[
+					
+				],
+				unCheckuserList:[
+					
+				],
+				defaultCheckedUser:[],
+				showCheckedUser:false,
 				title:"",
 				author:"",
 				docRelTime:"",
@@ -62,12 +118,16 @@
 		mounted(){
 			 
 		  this.userinfo = zmitiUtil.getUserInfo();
+		  this.getCheckUserList();
 		  this.company_list = this.userinfo.info.company_list;
 
 		  console.log(this);
 
 		  	var frame = document.querySelector('#_trs_editor_');
 			var descObj = document.querySelector('#basicprops .attr_textarea textarea');
+			if(!descObj){
+				return;
+			}
 			var desc = descObj.value;
 			document.querySelector('#basicprops .attr_textarea textarea');
 			var author = $('input[name="DocAuthor"]').val();
@@ -82,14 +142,102 @@
 			this.docRelTime = docRelTime;
 			this.docSourceName = docSourceName;
 			this.desc = desc;
+			this.docid = zmitiUtil.getQueryString('docId')
 			
 			var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
 			this.content = content.innerHTML;
 
 
+
+			return;
+
+		
+		   
+
 		},
 		
 		methods:{
+			submitDoc(){
+				let {obserable} = Vue;
+				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
+				zmitiUtil.ajax({
+					remark:'submitManuscript',
+					data:{
+						action:companyAdminActions.submitManuscript.action,
+						info:{
+							doctitle:title,
+							content:content,
+							cmsid:1,
+							docauthor:author,
+							docfrom:docSourceName,
+							remark:desc,
+							docid:docid,
+							check_userids:defaultCheckedUser.map(item=>{
+								return item.userid
+							}).join(',')
+						}
+					},
+					success(data){
+						if(data.getret === 0 ){
+							console.log(data);
+						}
+
+						obserable.trigger({
+							type:"showToast",
+							data:{
+								type:data.getret === 0 ? 'msg':'errMsg',
+								content:data.msg + (data.getret === 0? ' ^_^ ' : ' ：( '),
+								duration:2000
+							}
+						})
+
+					}
+				});
+			},
+			getCheckUserList(){
+				window.ss = this;
+				this.userinfo = zmitiUtil.getUserInfo();
+				this.company_list = this.userinfo.info.company_list;
+				var s = this;
+				zmitiUtil.ajax({
+
+					remark:'getCheckUserList',
+					data:{
+						action:companyAdminActions.getCheckUserList.action,
+						docid:123
+					},
+					success(data){
+						if(data.getret === 0 ){
+							s.checkedUser = data.checkedUser;
+							s.unCheckuserList = data.unchecked;
+							data.checkedUser.concat([]).map((dt)=>{
+								s.defaultCheckedUser = s.defaultCheckedUser.concat(dt.list);
+							})
+						}
+					}
+				});
+			},
+			toggleCheckUser(user,index,type){//选择审核人。
+				switch (type) {
+					case 'add':
+						this.checkedUser.push(this.unCheckuserList.splice(index,1)[0]);
+						this.defaultCheckedUser = [];
+						this.checkedUser.map((dt)=>{
+							this.defaultCheckedUser = this.defaultCheckedUser.concat(dt.list);
+						})
+						break;
+					case 'remove':
+						this.unCheckuserList.push(this.checkedUser.splice(index,1)[0]);
+						this.defaultCheckedUser = [];
+						this.checkedUser.map((dt)=>{
+							this.defaultCheckedUser = this.defaultCheckedUser.concat(dt.list);
+						})
+						break;
+				
+					default:
+						break;
+				}
+			},
 			 
 		}
 	}

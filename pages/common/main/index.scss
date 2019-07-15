@@ -30,7 +30,7 @@ $baseColor:#3390ff;
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	z-index: 100;
+	z-index: 999;
 	&.hide{
 		z-index: -1;
 		opacity:0;
@@ -53,6 +53,33 @@ $baseColor:#3390ff;
 		position:absolute;
 		top:0;
 		right:0;
+	}
+
+	.zmiti-msg{
+		@include pos(a);
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 30px;
+		color:#fff;
+		line-height: 30px;
+		text-align: center;
+		&.zmiti-err-msg{
+			background: #b10000;
+		}
+		&.zmiti-success-msg{
+			background: yellowgreen;
+		}
+		&.toast-enter-active,
+		&.toast-leave-active {
+			@include transition(.2s);
+		}
+
+		&.toast-enter,
+		&.toast-leave-to {
+			@include transform(translateY(-100%));
+			
+		}
 	}
 }
 

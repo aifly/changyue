@@ -31,18 +31,24 @@ $baseColor:#3390ff;
 			@include displayFlex(row);
 			cursor: pointer;
 
-
-			&>div{
+			a{
+				display:block;
 				width: 100%;
-				text-align: center;
-				line-height: 140px;
-				font-size:50px;
-				color:$baseColor;
-
-				&:hover{
-					background: #eee;
+				height: 100%;
+				text-decoration: none;
+				&>div{
+					width: 100%;
+					text-align: center;
+					line-height: 140px;
+					font-size:50px;
+					color:$baseColor;
+	
+					&:hover{
+						background: #eee;
+					}
 				}
 			}
+
 			
 			
 		}

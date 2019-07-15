@@ -214,8 +214,56 @@ let userActions = {
 	evaluateWorkOrder:{
 		desc:"用户评价工单",
 		action:"2001008"
-	}
+	},
+	
 };
+
+let companyAdminActions = {
+
+	addCMSType:{
+		desc:"单位管理员添加CMS类型",
+		action:"2001900"
+	},
+	delCMSType: {
+		desc: "单位管理员删除CMS类型",
+		action: "2001901"
+	},
+	editCMSType: {
+		desc: "单位管理员编辑CMS类型",
+		action: "2001902"
+	},
+	getCMSTypeList: {
+		desc: "单位管理员获取CMS类型列表",
+		action: "2001903"
+	},
+
+	addDepartment:{
+		desc:'单位管理员添加部门',
+		action:"2001904"
+	},
+	delDepartment: {
+		desc: "单位管理员删除单位部门",
+		action: "2001905"
+	},
+	editDepartment: {
+		desc: "单位管理员编辑单位部门",
+		action: "2001906"
+	},
+
+	getDepartmentList:{
+		desc:"单位管理员获取部门列表",
+		action:'2001907'
+	},
+	getCheckUserList:{
+		desc:'获取稿件的审核人员列表',
+		action: '2001908'
+	},
+	submitManuscript: {
+		desc: '用户提交稿件',
+		action: '2001020'
+	}
+}
+
 
 //基础配置
 let basicConfigActions = {
@@ -315,7 +363,8 @@ var zmitiActions =   /*#__PURE__*/{
 	companyActions,
 	basicConfigActions,
 	weatherActions,
-	cityActions
+	cityActions,
+	companyAdminActions
 }
 
 export  default zmitiActions;

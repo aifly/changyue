@@ -5,7 +5,16 @@
 					&times;
 				</div>
         	<router-view></router-view>
+			<transition name="toast">
+				<div v-if='errMsg' class='zmiti-err-msg zmiti-msg'>
+					{{errMsg}}
+				</div>
+				<div v-if='msg' class='zmiti-success-msg zmiti-msg'>
+					{{msg}}
+				</div>
+			</transition>
 		</div>
+
     </div>
 </template>
 <style lang='scss'>
@@ -19,6 +28,8 @@
 		name:'',
 		data(){
 			return{
+				errMsg:"",
+				msg:"",
 				imgs:window.imgs,
 				showMenu:false,
                 viewH:document.documentElement.clientHeight,
@@ -45,6 +56,7 @@
 		mounted(){
            ///this.menus = this.defaultMenu.concat([]);
 			var obserable = Vue.obserable;
+
 			
 			
 			var userinfo = zmitiUtil[this.isAdmin ? 'getAdminUserInfo':'getUserInfo']();
@@ -56,7 +68,15 @@
                /* zmitiUtil.getProductList((arr)=>{
                    this.productList = arr;
                },this); */
-            }
+			}
+			
+			obserable.on('showToast',(data)=>{
+				this[data.type] = data.content;
+				clearTimeout(this.timer);
+				this.timer = setTimeout(() => {
+					this[data.type] = '';
+				}, data.duration||2000);
+			})
         },
         watch:{
              

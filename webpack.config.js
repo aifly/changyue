@@ -39,7 +39,7 @@ module.exports = {
     // 以 .css 结尾的文件，使用 css-loader 解析css模块，使用 style-loader 将生成的 css 内容以标签的形式添加到 HTML 文档中
     rules:[
         {
-            // 文件匹配正则
+            //ya 文件匹配正则
             test:/\.css$/,
             // 加载器，从后向前倒序使用
             exclude: /node_modules/,

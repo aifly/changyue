@@ -7,8 +7,9 @@ import Login from './pages/components/login'
 import Company from './pages/components/company'
 import Nav from './pages/components/nav'
 import Index from './pages/components/index'
-import CheckUser from './pages/components/checkuser'
 Vue.use(VueRouter)
+
+Vue.obserable = new Obserable();
 
 //var VueTouch = im('vue-touch')
 /*import VueTouch from 'vue-touch';
@@ -73,14 +74,6 @@ function init( ){
 				name: 'index',
 				component: Index,
 			},
-			{
-				path: '/checkuser',
-				name: 'checkuser',
-				component: CheckUser,
-				
-			},
-		
-			
 		]
 	});
 	new Vue({
