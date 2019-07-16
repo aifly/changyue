@@ -42,13 +42,14 @@
 			 
 		  this.userinfo = zmitiUtil.getUserInfo();
 		  this.company_list = this.userinfo.info.company_list;
-
+		
 		},
 		
 		methods:{
 			getCurrentCompany(item){
 				window.localStorage.setItem('currentCompany',item.companyid);
-				this.$router.push({path:'nav'});
+				
+				this.$router.push({path: this.$route.params.id ? "/"+this.$route.params.id : '/nav'});
 			}
 		}
 	}

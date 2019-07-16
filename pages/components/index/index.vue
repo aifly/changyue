@@ -22,7 +22,7 @@
 					<div class='zmiti-article-remark'>
 						{{desc}}
 					</div>
-					<div class='zmiti-article-content' v-html='content'>
+					<div class='zmiti-article-content' v-html='content.innerHTML'>
 						
 					</div>
 				</div>
@@ -142,10 +142,10 @@
 			this.docRelTime = docRelTime;
 			this.docSourceName = docSourceName;
 			this.desc = desc;
-			this.docid = zmitiUtil.getQueryString('docId')
+			this.docid = zmitiUtil.getQueryString('DocumentId')
 			
 			var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
-			this.content = content.innerHTML;
+			this.content = content;
 
 
 
@@ -160,16 +160,30 @@
 			submitDoc(){
 				let {obserable} = Vue;
 				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
+
+				var set = new Set();
+				[...content.querySelectorAll("img")].forEach((img)=>{
+					if(img.className !== 'FCK__PageBreak' && img.getAttribute('src').indexOf('http')<=-1){//过滤掉分页图片和外网图片
+						set.add(img.src);
+					}
+				});
+				
+				[...set].forEach((url)=>{
+					console.log(url)
+				})
+
+				return;
 				zmitiUtil.ajax({
 					remark:'submitManuscript',
 					data:{
 						action:companyAdminActions.submitManuscript.action,
 						info:{
 							doctitle:title,
-							content:content,
+							content:content.innerHTML,
 							cmsid:1,
 							docauthor:author,
 							docfrom:docSourceName,
+							doctime:docRelTime,
 							remark:desc,
 							docid:docid,
 							check_userids:defaultCheckedUser.map(item=>{
@@ -197,6 +211,11 @@
 			getCheckUserList(){
 				window.ss = this;
 				this.userinfo = zmitiUtil.getUserInfo();
+				var companyid = zmitiUtil.getCurrentCompanyId();
+				if(!companyid){
+					this.$router.push({path:'/company/index'});
+					return;
+				}
 				this.company_list = this.userinfo.info.company_list;
 				var s = this;
 				zmitiUtil.ajax({
@@ -204,7 +223,9 @@
 					remark:'getCheckUserList',
 					data:{
 						action:companyAdminActions.getCheckUserList.action,
-						docid:123
+						docid:123,
+						companyid
+
 					},
 					success(data){
 						if(data.getret === 0 ){

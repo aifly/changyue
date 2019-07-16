@@ -52,6 +52,7 @@
 		methods:{
 			login(){
 				var {username,password} =this;
+				var s= this;
 				zmitiUtil.ajax({
 					remark:'login',
 					data:{
@@ -63,11 +64,11 @@
 
 					
 						if (data.getret === 0 || data.getret === 100) {
-							
+							window.localStorage.clear();
 							window.localStorage.setItem('login', JSON.stringify(data));
 							window.localStorage.setItem('cy-username', username);
 							window.localStorage.setItem('cy-password', password);
-							window.location.hash = '#/company'
+							s.$router.push({path:'company/'});
 						}
 					}
 				})

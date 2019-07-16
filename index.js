@@ -59,7 +59,7 @@ function init( ){
 				component: Login,
 				props: true
  			},{
-				path: '/company',
+				path: '/company/:id?',
 				name: 'company',
 				component: Company,
 				props: true
