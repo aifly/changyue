@@ -119,7 +119,6 @@ var zmitiUtil = {
 		if (userInfo && userInfo.ui) {
 			opt.ui = Object.assign(userInfo.ui, _ui);
 		}
-
 		var  baseUrl = 'http://newapi.zmiti.com'
 		$.ajax({
 			type:'post',

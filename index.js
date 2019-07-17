@@ -9,7 +9,10 @@ import Nav from './pages/components/nav'
 import Index from './pages/components/index'
 Vue.use(VueRouter)
 
+
+let host = 'http://file.zmiti.com/index/files/file?p=';
 Vue.obserable = new Obserable();
+Vue.host = host;
 
 //var VueTouch = im('vue-touch')
 /*import VueTouch from 'vue-touch';

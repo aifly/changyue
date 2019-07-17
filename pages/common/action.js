@@ -214,8 +214,7 @@ let userActions = {
 	evaluateWorkOrder:{
 		desc:"用户评价工单",
 		action:"2001008"
-	},
-	
+	}
 };
 
 let companyAdminActions = {
@@ -313,6 +312,10 @@ let resourceActions = {
 	basicUpdload:{
 		desc:"基础上传",
 		action:'/index/upload/upload_file'
+	},
+	userUploadByBase64: {
+		desc: '用户通过base64上传图片',
+		action: '3001325'
 	}
 
 };

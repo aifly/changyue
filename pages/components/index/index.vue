@@ -79,7 +79,7 @@
 
 <script>
 	import zmitiUtil from '../../common/lib/util';
-	var {cityActions,weatherActions,userActions,companyAdminActions} = zmitiUtil;
+	var {cityActions,weatherActions,userActions,companyAdminActions,resourceActions} = zmitiUtil;
 	import Vue from 'vue';
 	
 	import '../../common/directive';
@@ -121,7 +121,6 @@
 		  this.getCheckUserList();
 		  this.company_list = this.userinfo.info.company_list;
 
-		  console.log(this);
 
 		  	var frame = document.querySelector('#_trs_editor_');
 			var descObj = document.querySelector('#basicprops .attr_textarea textarea');
@@ -147,6 +146,8 @@
 			var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
 			this.content = content;
 
+			console.log(content);
+
 
 
 			return;
@@ -167,49 +168,103 @@
 						set.add(img.src);
 					}
 				});
+				var {host} = Vue;
 				
-				[...set].forEach((url)=>{
-					console.log(url)
+				let tasks = [];
+				var urls = [...set];
+				urls.forEach((url,i)=>{
+
+					let iNow = i;
+
+					var p1 = new Promise((resolve,reject)=>{
+						var img = new Image();
+						img.onload = ()=>{
+							var canvas = document.createElement('canvas');
+							canvas.width = img.width;
+							canvas.height = img.height;
+							var context = canvas.getContext('2d');
+							context.drawImage(img,0,0);
+							resolve();
+							var p2 = new Promise((res,rej)=>{
+								zmitiUtil.ajax({
+									remark:'userUploadByBase64',
+				 					_ui:{
+										type:2
+									},
+									data:{
+										action:resourceActions.userUploadByBase64.action,
+										base64:canvas.toDataURL()
+									},
+									success(data){
+										if(data.getret === 0||data.getret === 1){
+											var src = host + data.filepath;
+											[...content.querySelectorAll("img")].forEach((img,i)=>{
+												if(img.src === url){
+													content.querySelectorAll("img")[i].src = src;
+												}
+											})
+											res();
+										}
+									}
+								});
+							});
+							tasks.push(p2);
+
+							if(iNow === urls.length -1){
+								
+								Promise.all(tasks).then(()=>{
+									var frame = document.querySelector('#_trs_editor_');
+									var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
+									this.content = content;
+									console.log(content.innerHTML);
+	
+									zmitiUtil.ajax({
+										remark:'submitManuscript',
+										data:{
+											action:companyAdminActions.submitManuscript.action,
+											info:{
+												doctitle:title,
+												content:content.innerHTML,
+												cmsid:1,
+												docauthor:author,
+												docfrom:docSourceName,
+												doctime:docRelTime,
+												remark:desc,
+												docid:docid,
+												check_userids:defaultCheckedUser.map(item=>{
+													return item.userid
+												}).join(',')
+											}
+										},
+										success(data){
+											if(data.getret === 0 ){
+												console.log(data);
+											}
+	
+											obserable.trigger({
+												type:"showToast",
+												data:{
+													type:data.getret === 0 ? 'msg':'errMsg',
+													content:data.msg + (data.getret === 0? ' ^_^ ' : ' ：( '),
+													duration:2000
+												}
+											})
+	
+										}
+									});
+								})
+
+							}
+						}
+						img.src = url;
+					})
+					tasks.push(p1);
 				})
 
-				return;
-				zmitiUtil.ajax({
-					remark:'submitManuscript',
-					data:{
-						action:companyAdminActions.submitManuscript.action,
-						info:{
-							doctitle:title,
-							content:content.innerHTML,
-							cmsid:1,
-							docauthor:author,
-							docfrom:docSourceName,
-							doctime:docRelTime,
-							remark:desc,
-							docid:docid,
-							check_userids:defaultCheckedUser.map(item=>{
-								return item.userid
-							}).join(',')
-						}
-					},
-					success(data){
-						if(data.getret === 0 ){
-							console.log(data);
-						}
-
-						obserable.trigger({
-							type:"showToast",
-							data:{
-								type:data.getret === 0 ? 'msg':'errMsg',
-								content:data.msg + (data.getret === 0? ' ^_^ ' : ' ：( '),
-								duration:2000
-							}
-						})
-
-					}
-				});
 			},
 			getCheckUserList(){
 				window.ss = this;
+				this.docid = zmitiUtil.getQueryString('DocumentId');
 				this.userinfo = zmitiUtil.getUserInfo();
 				var companyid = zmitiUtil.getCurrentCompanyId();
 				if(!companyid){
@@ -223,9 +278,11 @@
 					remark:'getCheckUserList',
 					data:{
 						action:companyAdminActions.getCheckUserList.action,
-						docid:123,
-						companyid
+						condition:{
+							docid:s.docid,
+							companyid
 
+						}
 					},
 					success(data){
 						if(data.getret === 0 ){
