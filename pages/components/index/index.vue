@@ -22,7 +22,7 @@
 					<div class='zmiti-article-remark'>
 						{{desc}}
 					</div>
-					<div class='zmiti-article-content' v-html='content.innerHTML'>
+					<div class='zmiti-article-content' ref='content' v-html='content.innerHTML'>
 						
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 				<div @click="showCheckedUser = true">
 					<ul class='zmiti-has-checked'>
 						<li @click="toggleCheckUser(item,k,'remove')" v-for='(item,k) of defaultCheckedUser' :key="k" title='点击选择'>
-							{{item.username}}
+							{{item.realname}}
 						</li>
 					</ul>
 					<div class='zmiti-back'></div>
@@ -51,7 +51,7 @@
 					<h3>{{checkuser.departmentname}}</h3>
 					<ul class='zmiti-has-checked'>
 						<li @click="toggleCheckUser(item,k,'remove')" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
-							{{item.username}}
+							{{item.realname}}
 						</li>
 					</ul>
 				</div>
@@ -163,19 +163,19 @@
 				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
 
 				var set = new Set();
+
+				var content = this.$refs['content'];
 				[...content.querySelectorAll("img")].forEach((img)=>{
+					//FCK__PageBreak为分页组件。过滤掉
 					if(img.className !== 'FCK__PageBreak' && img.getAttribute('src').indexOf('http')<=-1){//过滤掉分页图片和外网图片
 						set.add(img.src);
 					}
 				});
 				var {host} = Vue;
-				
 				let tasks = [];
 				var urls = [...set];
 				urls.forEach((url,i)=>{
-
 					let iNow = i;
-
 					var p1 = new Promise((resolve,reject)=>{
 						var img = new Image();
 						img.onload = ()=>{
