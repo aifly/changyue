@@ -61,7 +61,7 @@
 					<h3>{{checkuser.departmentname}}</h3>
 					<ul class='zmiti-has-unchecked'>
 						<li @click="toggleCheckUser(item,k,'add')" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
-							{{item.username}}
+							{{item.realname}}
 						</li>
 						
 					</ul>
@@ -213,45 +213,7 @@
 							if(iNow === urls.length -1){
 								
 								Promise.all(tasks).then(()=>{
-									var frame = document.querySelector('#_trs_editor_');
-									var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
-									this.content = content;
-									console.log(content.innerHTML);
-	
-									zmitiUtil.ajax({
-										remark:'submitManuscript',
-										data:{
-											action:companyAdminActions.submitManuscript.action,
-											info:{
-												doctitle:title,
-												content:content.innerHTML,
-												cmsid:1,
-												docauthor:author,
-												docfrom:docSourceName,
-												doctime:docRelTime,
-												remark:desc,
-												docid:docid,
-												check_userids:defaultCheckedUser.map(item=>{
-													return item.userid
-												}).join(',')
-											}
-										},
-										success(data){
-											if(data.getret === 0 ){
-												console.log(data);
-											}
-	
-											obserable.trigger({
-												type:"showToast",
-												data:{
-													type:data.getret === 0 ? 'msg':'errMsg',
-													content:data.msg + (data.getret === 0? ' ^_^ ' : ' ：( '),
-													duration:2000
-												}
-											})
-	
-										}
-									});
+									this.submit();
 								})
 
 							}
@@ -260,7 +222,53 @@
 					})
 					tasks.push(p1);
 				})
+				if(urls.length<=0){
+					this.submit();
+				}
 
+			},
+
+			submit(){
+				let {obserable} = Vue;
+				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
+				var frame = document.querySelector('#_trs_editor_');
+				var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
+				this.content = content;
+
+				zmitiUtil.ajax({
+					remark:'submitManuscript',
+					data:{
+						action:companyAdminActions.submitManuscript.action,
+						info:{
+							doctitle:title,
+							content:content.innerHTML,
+							cmsid:1,
+							docauthor:author,
+							docfrom:docSourceName,
+							doctime:docRelTime,
+							remark:desc,
+							docid:docid,
+							check_userids:defaultCheckedUser.map(item=>{
+								return item.userid
+							}).join(',')
+						}
+					},
+					success(data){
+						if(data.getret === 0 ){
+							console.log(data);
+						}
+
+						obserable.trigger({
+							type:"showToast",
+							data:{
+								type:data.getret === 0 ? 'msg':'errMsg',
+								content:data.msg + (data.getret === 0? ' ^_^ ' : ' ：( '),
+								duration:2000
+							}
+						})
+
+					}
+				});
 			},
 			getCheckUserList(){
 				window.ss = this;
