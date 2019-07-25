@@ -133,6 +133,27 @@
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
+  position: relative;
+}
+
+.zmiti-index-main-ui .zmiti-submit-btn span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  border-left: none;
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-top: -3px;
+  -webkit-animation: rotate 1s linear infinite;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .zmiti-index-main-ui .zmiti-checked-userlist > div {

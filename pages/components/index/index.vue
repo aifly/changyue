@@ -19,8 +19,8 @@
 						</div>
 					</div>
 
-					<div class='zmiti-article-remark'>
-						{{desc}}
+					<div class='zmiti-article-remark' v-html='desc'>
+						
 					</div>
 					<div class='zmiti-article-content' ref='content' v-html='content.innerHTML'>
 						
@@ -40,7 +40,9 @@
 				</div>
 
 			</div>
-			<div class='zmiti-submit-btn'  v-press @click="submitDoc">提交</div>
+			<div class='zmiti-submit-btn'  v-press @click="submitDoc">
+				提交<span v-if='isSubmiting'></span>
+			</div>
 		</template>
 		<template v-else>
 			<div class="zmiti-checkuser-main-ui lt-full">
@@ -90,6 +92,7 @@
 		data(){
 			return{
 				company_list:[],
+				isSubmiting:false,
 				checkedUser:[
 					
 				],
@@ -159,7 +162,29 @@
 		
 		methods:{
 			submitDoc(){
+				if(this.isSubmiting){
+					return;
+				}
+				this.isSubmiting = true;
 				let {obserable} = Vue;
+				var userids = this.defaultCheckedUser.map(item=>{
+								return item.userid
+							}).join(',');
+
+	
+				if(!userids){
+					obserable.trigger({
+						type:"showToast",
+						data:{
+							type:'errMsg',
+							content:'审核人不能为空  ：( ',
+							duration:4000
+						}
+					})
+					this.isSubmiting = false;
+					return;
+				}
+			
 				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
 
 				var set = new Set();
@@ -235,6 +260,14 @@
 				var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
 				this.content = content;
 
+				var companyid = window.localStorage.getItem('currentCompany');
+				if(!companyid){
+					this.$router.push({path:'/company/index'});
+					return;
+				}
+
+				var s = this;
+
 				zmitiUtil.ajax({
 					remark:'submitManuscript',
 					data:{
@@ -248,14 +281,16 @@
 							doctime:docRelTime,
 							remark:desc,
 							docid:docid,
+							companyid,
 							check_userids:defaultCheckedUser.map(item=>{
 								return item.userid
 							}).join(',')
 						}
 					},
 					success(data){
+						s.isSubmiting = false;
 						if(data.getret === 0 ){
-							console.log(data);
+							s.$router.push({path:'/nav'});
 						}
 
 						obserable.trigger({
@@ -295,7 +330,21 @@
 					success(data){
 						if(data.getret === 0 ){
 							s.checkedUser = data.checkedUser;
+
 							s.unCheckuserList = data.unchecked;
+							var userid = s.userinfo.ui.userid*1;
+							s.unCheckuserList.forEach((c,i)=>{
+								c.list.forEach((item,k)=>{
+									if(item.userid*1 === userid){
+										c.list.splice(k,1);
+									}
+								});
+							})
+							s.unCheckuserList.forEach((c,i)=>{
+								if(c.list.length<=0){
+									s.unCheckuserList.splice(i,1);
+								}
+							})
 							data.checkedUser.concat([]).map((dt)=>{
 								s.defaultCheckedUser = s.defaultCheckedUser.concat(dt.list);
 							})
