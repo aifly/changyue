@@ -22,17 +22,17 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	//console.log(frame,'frame');
 	
 		//zmitiObj.data && $('.zmiti-dialog-main-ui').removeClass('hide');
-	var frame = document.querySelector('#_trs_editor_');
+	/* var frame = document.querySelector('#_trs_editor_');
 
 	document.querySelector('#basicprops .attr_textarea textarea');
 
 	var zmitiObj = {};
 	
 	var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
-	zmitiObj.content = content.innerHTML;
+	zmitiObj.content = content.innerHTML; */
 	sendResponse(123);
 	
- 	init( );
+ 	init();
 
 	
 	
@@ -41,7 +41,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 function init( ){
 	var app = document.createElement('div');
-	app.id = 'app';
+	app.id = 'changeyue-app';
 	document.body.appendChild(app);
 
 	var obserable = new Obserable();
