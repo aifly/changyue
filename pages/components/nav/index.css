@@ -4,9 +4,14 @@
     box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
 }*/
 .zmiti-nav-main-ui {
-  margin: 80px auto;
+  margin: 0px auto;
   width: 80%;
   left: 10%;
+}
+
+.zmiti-nav-main-ui .zmiti-title {
+  height: 100px;
+  line-height: 8;
 }
 
 .zmiti-nav-main-ui .zmiti-function-list {
@@ -51,6 +56,10 @@
   text-decoration: none;
 }
 
+.zmiti-nav-main-ui .zmiti-function-list li a:hover div {
+  background: #eee;
+}
+
 .zmiti-nav-main-ui .zmiti-function-list li a > div {
   width: 100%;
   text-align: center;
@@ -59,6 +68,11 @@
   color: #3390ff;
 }
 
-.zmiti-nav-main-ui .zmiti-function-list li a > div:hover {
-  background: #eee;
+.zmiti-nav-main-ui .zmiti-function-list li .zmiti-function-name {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  top: -44px;
+  color: #333;
 }

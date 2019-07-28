@@ -83,7 +83,7 @@
         },
 		methods:{
 			closeAll(){//移除整个插件~~~
-				document.body.removeChild($('#app1')[0]);
+				document.body.removeChild(document.querySelector("#changyue-app1"));
 			}
 		}
 	}

@@ -29,10 +29,24 @@ var zmitiUtil = {
 		}
 		return y + '-' + m + '-' + d ;
 	},
-
+	getCurrentCMS(){
+		try {
+			var cms = JSON.parse(window.localStorage.getItem('currentCMS'));
+			return cms;
+		}
+		catch (e) {
+			return {};
+		}
+	},
 
 	getCurrentCompanyId(){
-		return window.localStorage.getItem('currentCompany');
+		try{
+			var company = JSON.parse(window.localStorage.getItem('currentCompany'));
+			return company;
+		}
+		catch(e){
+			return {};
+		}
 	},
 
 	getQueryString: function (name) {

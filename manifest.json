@@ -14,7 +14,7 @@
 		"webNavigation",
 		"contextMenus",
 		"notifications",
-		"\u003Call_urls>"
+		"http://172.27.2.167/wcm/app/document/*"
 	],
 	"icons":{
 		"16": "./assets/images/logo.png",
@@ -36,7 +36,9 @@
 	"content_scripts":[
 		{
 
-			"matches": ["\u003Call_urls>"],
+			"matches": [
+				"http://172.27.2.167/wcm/app/document/*"
+			],
 
 			"js": ["./assets/js/jquery.min.js", "./assets/js/app.js"],
 			"css":["./assets/css/dialog.css"],

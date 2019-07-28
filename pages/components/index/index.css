@@ -82,45 +82,6 @@
   line-height: 140px;
 }
 
-.zmiti-index-main-ui .zmiti-back {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: rgba(51, 144, 255, 0.1);
-  border-radius: 50%;
-  margin: 10px 0;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.zmiti-index-main-ui .zmiti-back::before {
-  content: '';
-  width: 86%;
-  height: 86%;
-  left: 7%;
-  top: 7%;
-  background: #3390ff;
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-}
-
-.zmiti-index-main-ui .zmiti-back:after {
-  cursor: pointer;
-  content: "";
-  width: 14px;
-  height: 14px;
-  border: 2px solid #fff;
-  left: 44%;
-  top: 50%;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  position: absolute;
-  margin: -7px 0 -7px;
-  border-right: 0;
-  border-top: 0;
-}
-
 .zmiti-index-main-ui .zmiti-submit-btn {
   width: 120px;
   height: 40px;

@@ -69,43 +69,7 @@ $baseColor:#3390ff;
 		line-height: 140px;
 	}
 
-	.zmiti-back{
-		@include pos(a);
-		width: 60px;
-		height: 60px;
-		background: rgba(51,144,255,.1);
-		@include br();
-		margin: 10px 0;
-		z-index: 1;
-		cursor: pointer;
-
-		&::before{
-			content:'';
-			width: 86%;
-			height: 86%;
-			left: 7%;
-			top: 7%;
-			background: rgba(51,144,255,1);
-			@include br();
-			@include pos(a);
-			cursor: pointer;
-		}
-		&:after{
-			cursor: pointer;
-			content:"";
-			$size:14px;
-			width: $size;
-			height: $size;
-			border:2px solid #fff;
-			left: 44%;
-			top: 50%;
-			@include transform(rotate(45deg));
-			@include pos(a);
-			margin: -$size/2 0 0  -$size/2;
-			border-right: 0;
-			border-top: 0;
-		}
-	}
+	
 	.zmiti-submit-btn{
 		width: 120px;
 		height: 40px;

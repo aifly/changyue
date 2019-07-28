@@ -160,7 +160,8 @@ let companyActions = {//用户单位模块
 	changeCompanyAdmin:{
 		desc:'单位变更管理员',
 		action:'1000709'
-	}
+	},
+	
 	
 
 }
@@ -214,6 +215,10 @@ let userActions = {
 	evaluateWorkOrder:{
 		desc:"用户评价工单",
 		action:"2001008"
+	},
+	getCMSList: {
+		desc: "获取CMS列表",
+		action: '2001915'
 	}
 };
 

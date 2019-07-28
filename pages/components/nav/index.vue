@@ -5,15 +5,28 @@
 			<ul>
 				<li>
 					<router-link to="index">
-						<div class='zmt_iconfont'>&#xe609;</div>
+						<div class='zmt_iconfont'>&#xe647;</div>
+						<span class='zmiti-function-name'>提交审阅</span>
 					</router-link>
 				</li>
-				<li class='zmt_iconfont'>
+				<li class='zmt_iconfont' v-if='false'>
 					<router-link to="index">
-						<div class='zmt_iconfont'>&#xe60c;</div>
+						<div class='zmt_iconfont'>&#xe635;</div>
+						<span class='zmiti-function-name'>提交审阅</span>
 					</router-link>
 				</li>
-				<li></li>
+				<li>
+					<router-link to="setting">
+						<div class='zmt_iconfont'>&#xe7e8;</div>
+						<span class='zmiti-function-name'>设置</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="user">
+						<div class='zmt_iconfont'>&#xe633;</div>
+						<span class='zmiti-function-name'>个人中心</span>
+					</router-link>
+				</li>
 				<li></li>
 				<li></li>
 				<li></li>

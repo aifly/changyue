@@ -2,7 +2,7 @@
 	<div class="zmiti-company-main-ui lt-full">
 		<h2 class='zmiti-title'>单位选择</h2>
 		<ul id='zmiti-company-list'>
-			<li @click='getCurrentCompany(company)' v-for="(company,i) of company_list" ::key="i">
+			<li @click='getCurrentCompany(company)' v-for="(company,i) of company_list" :key="i">
 				<label></label>
 				<span>{{company.companyname}}</span>
 				<label></label>
@@ -41,13 +41,19 @@
 		mounted(){
 			 
 		  this.userinfo = zmitiUtil.getUserInfo();
-		  this.company_list = this.userinfo.info.company_list;
+		  if(!this.userinfo){
+			  this.$router.push({path:'/login'})
+		  }else{
+			this.company_list = this.userinfo.info.company_list;
+		  }
+
+		  //
 		
 		},
 		
 		methods:{
 			getCurrentCompany(item){
-				window.localStorage.setItem('currentCompany',item.companyid);
+				window.localStorage.setItem('currentCompany',JSON.stringify(item));
 				
 				this.$router.push({path: this.$route.params.id ? "/"+this.$route.params.id : '/nav'});
 			}

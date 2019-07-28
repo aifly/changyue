@@ -45,7 +45,7 @@
 		},
 		mounted() {
 			if(this.username && this.password){
-				this.login();
+				//this.login();
 			}
 		},
 		
@@ -61,14 +61,23 @@
 						password
 					},
 					success(data){
-
 					
 						if (data.getret === 0 || data.getret === 100) {
 							window.localStorage.clear();
 							window.localStorage.setItem('login', JSON.stringify(data));
 							window.localStorage.setItem('cy-username', username);
 							window.localStorage.setItem('cy-password', password);
-							s.$router.push({path:'company/'});
+							console.log(data);
+							var companyList = data.info.company_list;
+							if(companyList.length<=0){
+								alert('你还没有绑定单位');
+								return;
+							}
+							if(companyList.length<=1){
+								window.localStorage.setItem('currentCompany',JSON.stringify(companyList[0]));
+								
+							}
+							s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
 						}
 					}
 				})

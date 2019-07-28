@@ -32,7 +32,7 @@
 				<h3>已选审核人：</h3>
 				<div @click="showCheckedUser = true">
 					<ul class='zmiti-has-checked'>
-						<li @click="toggleCheckUser(item,k,'remove')" v-for='(item,k) of defaultCheckedUser' :key="k" title='点击选择'>
+						<li v-for='(item,k) of defaultCheckedUser' :key="k" title='点击选择'>
 							{{item.realname}}
 						</li>
 					</ul>
@@ -49,20 +49,20 @@
 				<h2 class='zmiti-title' >审核人员名单</h2>
 				<div class='zmiti-checkuser-list  zmiti-scroll'>
 				<h3>已选审核人：</h3>
-				<div v-for='(checkuser) of checkedUser' :key="checkuser.departmentname">
+				<div v-for='(checkuser) of checkedUser' :key="checkuser.departmentname" v-show='checkuser.list.length>0'>
 					<h3>{{checkuser.departmentname}}</h3>
 					<ul class='zmiti-has-checked'>
-						<li @click="toggleCheckUser(item,k,'remove')" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
+						<li @click="toggleCheckUser(item,k,'remove',checkuser)" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
 							{{item.realname}}
 						</li>
 					</ul>
 				</div>
 				<hr>
 				<h3>未选审核人：</h3>
-				<div v-for='(checkuser,i) of unCheckuserList' :key="i">
+				<div v-for='(checkuser,i) of unCheckuserList' :key="i"  v-show='checkuser.list.length>0'>
 					<h3>{{checkuser.departmentname}}</h3>
 					<ul class='zmiti-has-unchecked'>
-						<li @click="toggleCheckUser(item,k,'add')" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
+						<li @click="toggleCheckUser(item,k,'add',checkuser)" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
 							{{item.realname}}
 						</li>
 						
@@ -165,12 +165,21 @@
 				if(this.isSubmiting){
 					return;
 				}
+
 				this.isSubmiting = true;
 				let {obserable} = Vue;
 				var userids = this.defaultCheckedUser.map(item=>{
 								return item.userid
 							}).join(',');
 
+				var currentCms = zmitiUtil.getCurrentCMS();
+
+				if(!currentCms || !currentCms.cmsid){
+					this.$router.push({path:'/setting/index'});
+					return;
+				}
+
+				var cmsid = currentCms.cmsid;
 	
 				if(!userids){
 					obserable.trigger({
@@ -238,7 +247,7 @@
 							if(iNow === urls.length -1){
 								
 								Promise.all(tasks).then(()=>{
-									this.submit();
+									this.submit(cmsid);
 								})
 
 							}
@@ -248,26 +257,26 @@
 					tasks.push(p1);
 				})
 				if(urls.length<=0){
-					this.submit();
+					this.submit(cmsid);
 				}
 
 			},
 
-			submit(){
+			submit(cmsid){
 				let {obserable} = Vue;
 				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
 				var frame = document.querySelector('#_trs_editor_');
 				var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
 				this.content = content;
 
-				var companyid = window.localStorage.getItem('currentCompany');
-				if(!companyid){
+				var companyid = zmitiUtil.getCurrentCompanyId();;
+				if(!companyid||!companyid.companyid){
 					this.$router.push({path:'/company/index'});
 					return;
 				}
+				var companyid = companyid.companyid;
 
 				var s = this;
-
 				zmitiUtil.ajax({
 					remark:'submitManuscript',
 					data:{
@@ -275,7 +284,7 @@
 						info:{
 							doctitle:title,
 							content:content.innerHTML,
-							cmsid:1,
+							cmsid,
 							docauthor:author,
 							docfrom:docSourceName,
 							doctime:docRelTime,
@@ -309,11 +318,14 @@
 				window.ss = this;
 				this.docid = zmitiUtil.getQueryString('DocumentId');
 				this.userinfo = zmitiUtil.getUserInfo();
-				var companyid = zmitiUtil.getCurrentCompanyId();
-				if(!companyid){
+				var companyObj = zmitiUtil.getCurrentCompanyId();
+
+				
+				if(!companyObj||!companyObj.companyid){
 					this.$router.push({path:'/company/index'});
 					return;
 				}
+				var companyid= companyObj.companyid;
 				this.company_list = this.userinfo.info.company_list;
 				var s = this;
 				zmitiUtil.ajax({
@@ -352,17 +364,72 @@
 					}
 				});
 			},
-			toggleCheckUser(user,index,type){//选择审核人。
+			toggleCheckUser(user,index,type,parent){//选择审核人。
 				switch (type) {
 					case 'add':
-						this.checkedUser.push(this.unCheckuserList.splice(index,1)[0]);
+						var obj = {
+							departmentid:parent.departmentid,
+							departmentname:parent.departmentname,
+							list:[]
+						}
+						obj.list.push(user);
+
+						var isExists = false;
+						this.checkedUser.forEach((checkuser)=>{
+							if(checkuser.departmentid === obj.departmentid){
+								checkuser.list.push(user);
+								isExists = true;
+							}
+						});
+						if(!isExists){
+							this.checkedUser.push(obj);
+						}
+
+						this.unCheckuserList.forEach((item,i)=>{
+							if(item.departmentid === obj.departmentid){
+								item.list.forEach((ls,k)=>{
+									if(ls.userid === user.userid){
+										item.list.splice(k,1);
+									}
+								})
+							}
+						})
 						this.defaultCheckedUser = [];
 						this.checkedUser.map((dt)=>{
 							this.defaultCheckedUser = this.defaultCheckedUser.concat(dt.list);
 						})
+						console.log(this.defaultCheckedUser)
 						break;
 					case 'remove':
-						this.unCheckuserList.push(this.checkedUser.splice(index,1)[0]);
+
+						var obj = {
+							departmentid:parent.departmentid,
+							departmentname:parent.departmentname,
+							list:[]
+						}
+						obj.list.push(user);
+
+						var isExists = false;
+						this.unCheckuserList.forEach((checkuser)=>{
+							if(checkuser.departmentid === obj.departmentid){
+								checkuser.list.push(user);
+								isExists = true;
+							}
+						});
+						if(!isExists){
+							this.unCheckuserList.push(obj);
+						}
+
+						this.checkedUser.forEach((item,i)=>{
+							if(item.departmentid === obj.departmentid){
+								item.list.forEach((ls,k)=>{
+									if(ls.userid === user.userid){
+										item.list.splice(k,1);
+									}
+								})
+							}
+						})
+
 						this.defaultCheckedUser = [];
 						this.checkedUser.map((dt)=>{
 							this.defaultCheckedUser = this.defaultCheckedUser.concat(dt.list);
