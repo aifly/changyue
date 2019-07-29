@@ -10,6 +10,7 @@ var zmitiUtil = {
 	weatherActions: zmitiActions.weatherActions,
 	cityActions: zmitiActions.cityActions,
 	companyAdminActions: zmitiActions.companyAdminActions,
+	changYueAcions: zmitiActions.changYueAcions,
 
 	formatDate(inputTime,flag = false){
 		var date = new Date(inputTime * 1000);
@@ -144,6 +145,7 @@ var zmitiUtil = {
 				option._this && option._this.$Message.error('服务器开小差了，请稍后重试');
 			},
 			success(dt){
+
 				if (dt.getret === 0) {
 
 				}

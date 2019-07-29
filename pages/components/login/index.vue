@@ -3,7 +3,7 @@
 		<div class='zmiti-login-C'>
 			<h2 class='zmiti-title'>登录</h2>
 			<div class='zmiti-icon'>
-
+				<img src="chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/logo.png" alt="">
 			</div>
 
 			<div class='zmiti-login-form'>
@@ -12,8 +12,9 @@
 					<input type="text"  v-model='username' placeholder="智媒体用户名" />
 				</div>
 				<div class='zmiti-login-input'>
-					<input type="password" v-model='password' placeholder="智媒体密码" />
+					<input type="password" v-model='password' placeholder="智媒体密码" @keydown.13='login'/>
 				</div>
+				<div class='zmiti-login-error'>{{errMsg}}</div>
 				<div class='zmiti-login-btn' @click='login'>登录</div>
 			</div>
 		</div>
@@ -31,6 +32,7 @@
 		name:'zmitiindex',
 		data(){
 			return{
+				errMsg:"",
 				viewH:document.documentElement.clientHeight,
 				username:window.localStorage.getItem('cy-username'),
 				password:window.localStorage.getItem('cy-password')
@@ -78,6 +80,11 @@
 								
 							}
 							s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
+						}else{
+							s.errMsg = data.msg;
+							setTimeout(() => {
+								s.errMsg = '';
+							}, 2000);
 						}
 					}
 				})

@@ -10,6 +10,12 @@ h2.zmiti-title{
 	color:$baseColor;
 }
 
+@at-root.zmiti-title{
+	height: 100px;
+	line-height: 8;
+	font-weight:bold;
+}
+
 .zmiti-back{
 		@include pos(a);
 		width: 60px;
@@ -46,4 +52,161 @@ h2.zmiti-title{
 			border-right: 0;
 			border-top: 0;
 		}
+
+		a{
+			@include pos(a);
+			width: 100%;
+			height: 100%;
+		}
 	}
+
+
+@at-root.zmiti-menu-item{
+		width: 80%;
+		margin: 30px auto;
+		height: 60px;
+		line-height: 60px;
+		background: #fff;
+		text-indent: 2em;
+		
+		@include pos(r);
+		&:before{
+			content:'';
+			width: 4px;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: $baseColor;
+			@include pos(a);
+		}
+
+		ul{
+			width:100%;
+			background: #e6edf7;
+			height: 0;
+			overflow: hidden;
+			@include transition(.3s);
+			z-index:10;
+			&.active{
+				height: auto;
+			}
+			@include pos(a);
+			li{
+				
+				cursor: pointer;
+				@include pos(r);
+				&:nth-of-type(1){
+					border-top: 1px solid #d9e2ee;
+					&:before{
+						content:'';
+						width: 30px;
+						height:30px;
+						left: 0;
+						top: 0;
+						z-index: -1;
+						@include pos(a);
+
+						background: #e6edf7;
+						@include transform(rotate(45deg));
+						@include br(5px);
+						left: 80%;;
+						top: -10px;
+
+					}
+				}
+				border: 1px solid #d9e2ee;
+				border-top: none;
+				&:hover{
+					background: #ddd;
+				}
+				&:nth-of-type(1):hover{
+					&:before{
+						background: #ddd;
+					}
+				}
+				
+			}
+			
+			
+
+		}
+	}
+
+
+	@at-root.zmiti-menu-name{
+		color:#ccc;
+		cursor: pointer;
+		&.active{
+			color:#333;
+		}
+
+		&.slider{
+			label.label{
+				@include transform(rotate(90deg));
+			}
+			
+		}
+		label{
+			@include pos(a);
+			width: 4px;
+			height: 100%;
+			left: 0;
+			top: 0;
+			@include transition(.1s);
+			background:$baseColor;
+
+			&:nth-of-type(2){
+				width: 36px;
+				height: 36px;
+				@include br();
+				right: 30px;
+				top: 15px;
+				background:rgba(51,144,255,.1);
+				left:auto;
+
+				&::before{
+					content:"";
+					@include pos(a);
+					@include transition(.2s);
+					width: 24%;
+					height: 24%;
+					border:2px solid $baseColor;
+					@include transform(rotate(45deg));
+					border-left: none;
+					border-bottom: none;
+					top: 37%;
+					left: 30%;
+				}
+			}
+		}
+	}
+
+
+@at-root.zmiti-scroll{
+	overflow: auto;
+	width:100%;
+}
+@at-root.zmiti-scroll::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 8px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+	height: 8px;
+	
+}
+
+
+@at-root.zmiti-scroll::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+@at-root.zmiti-scroll::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}

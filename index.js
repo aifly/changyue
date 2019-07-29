@@ -8,6 +8,11 @@ import Company from './pages/components/company'
 import Nav from './pages/components/nav'
 import Setting from './pages/components/setting'
 import Index from './pages/components/index'
+import User from './pages/components/user'
+import Password from './pages/components/password'
+import MySubmit from './pages/components/mysubmit'
+import MyCheck from './pages/components/mycheck'
+
 
 import './pages/common/css/index.css';
 Vue.use(VueRouter)
@@ -86,6 +91,23 @@ function init( ){
 					path: '/setting/:id?',
 					name: 'setting',
 					component: Setting,
+				},
+				{
+					path: '/user/:id?',
+					name: 'user',
+					component: User,
+				}, {
+					path: '/password',
+					name: 'password',
+					component: Password,
+				}, {
+					path: '/mysubmit',
+					name: 'mysubmit',
+					component: MySubmit,
+				}, {
+					path: '/mycheck',
+					name: 'mycheck',
+					component: MyCheck
 				},
 			]
 		});

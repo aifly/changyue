@@ -64,7 +64,6 @@ module.exports = {
 		}
     ]
   },
-
   // 插件
   plugins:[
     ///new VueLoaderPlugin(),

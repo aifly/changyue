@@ -1,8 +1,5 @@
 <template>
 	<div class="zmiti-user-main-ui lt-full">
-		<div class='zmiti-back' >
-			<router-link :to='"/nav"'></router-link>
-		</div>
 		<h2 class='zmiti-title'>我的</h2>
 		<div class='zmiti-menu-item' v-for="(menu,i) in menuList" :key="i">
 			<div class='zmiti-menu-name' @click="$router.push({path:menu.to})" >
@@ -34,16 +31,16 @@
 				menuList:[
 					{
 						name:'我的审查',
-						to:'/mycheck'
+						to:'/company'
 					},{
 						name:'我的提交',
-						to:'/mysubmit'
+						to:'/company'
 					},{
 						name:'切换单位',
 						to:'/company'
 					},{
 						name:'修改密码',
-						to:'/password'
+						to:'/company'
 					}
 				]
 			}

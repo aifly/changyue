@@ -166,6 +166,30 @@ let companyActions = {//用户单位模块
 
 }
 
+
+let changYueAcions = {
+	getMySubmitList: {
+		desc: '获取我的提交列表',
+		action: '2001910'
+	},
+	getMyCheckList: {
+		desc: '获取我的审核列表',
+		action: '2001909'
+	},
+	checkManuscript: {
+		desc: '审核稿件',
+		action: '2001911'
+	},
+	delManuscript: {
+		desc: '删除稿件',
+		action: '2001912'
+	},
+	manuscriptDetail: {
+		desc: "稿件详情",
+		action: "2001913"
+	}
+
+}
 let userActions = {
 
 	userLogin:{
@@ -372,7 +396,8 @@ var zmitiActions =   /*#__PURE__*/{
 	basicConfigActions,
 	weatherActions,
 	cityActions,
-	companyAdminActions
+	companyAdminActions,
+	changYueAcions
 }
 
 export  default zmitiActions;

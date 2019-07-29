@@ -4,8 +4,8 @@
 			<router-link :to='$route.params.id?"/"+$route.params.id:"/nav"'></router-link>
 		</div>
 		<h2 class='zmiti-title'>选择CMS版本</h2>
-		<div class='zmiti-cms-item'>
-			<div class='zmiti-cms-name' :class='{"active":cmsIndex>-1,"slider":showCmsName}' @click="showCmsName = !showCmsName">
+		<div class='zmiti-cms-item zmiti-menu-item'>
+			<div class='zmiti-cms-name zmiti-menu-name' :class='{"active":cmsIndex>-1,"slider":showCmsName}' @click="showCmsName = !showCmsName">
 				<span v-if='cmsIndex>-1'>
 					{{cmsList[cmsIndex].cmsname}}
 				</span>
@@ -19,8 +19,8 @@
 				</li>
 			</ul>
 		</div>
-		<div class='zmiti-cms-item'>
-			<div class='zmiti-cms-name'  :class='{"active":versionIndex>-1,"slider":showVerion}' @click="showVerion = !showVerion">
+		<div class='zmiti-cms-item zmiti-menu-item'>
+			<div class='zmiti-cms-name zmiti-menu-name'  :class='{"active":versionIndex>-1,"slider":showVerion}' @click="showVerion = !showVerion">
 				<span v-if='versionIndex>-1'>
 					{{cmsList[cmsIndex].version[versionIndex].version}}
 				</span>

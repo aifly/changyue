@@ -11,7 +11,11 @@
 			@include br();
 			background:rgba(51,144,255,.1);
 			margin: 20px auto 40px;
-
+			
+			
+			img{
+				@include transform(scale(.7));
+			}
 		}
 		
 		
@@ -46,6 +50,14 @@
 					}
 					
 				}
+			}
+
+			.zmiti-login-error{
+				color:#f00;
+				text-align: left;
+				width: 300px;
+				margin: 0 auto;
+				height:16px;
 			}
 			.zmiti-login-btn{
 				width:120px;

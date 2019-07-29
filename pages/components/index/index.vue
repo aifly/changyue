@@ -3,6 +3,9 @@
 		<div class='zmiti-back' @click="showCheckedUser = false" v-if='showCheckedUser'>
 
 		</div>
+		<div class='zmiti-back' v-else>
+			<router-link :to='"/nav"'></router-link>
+		</div>
 		<template v-if='!showCheckedUser'>
 			<h2 class='zmiti-title'>内容抓取</h2>
 			<div class="zmiti-preview">

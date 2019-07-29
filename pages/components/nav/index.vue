@@ -16,6 +16,12 @@
 					</router-link>
 				</li>
 				<li>
+					<router-link to="workorder">
+						<div class='zmt_iconfont'>&#xe61c;</div>
+						<span class='zmiti-function-name'>工单</span>
+					</router-link>
+				</li>
+				<li>
 					<router-link to="setting">
 						<div class='zmt_iconfont'>&#xe7e8;</div>
 						<span class='zmiti-function-name'>设置</span>
