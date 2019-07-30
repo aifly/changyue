@@ -12,6 +12,7 @@ import User from './pages/components/user'
 import Password from './pages/components/password'
 import MySubmit from './pages/components/mysubmit'
 import MyCheck from './pages/components/mycheck'
+import Detail from './pages/components/detail';
 
 
 import './pages/common/css/index.css';
@@ -108,6 +109,10 @@ function init( ){
 					path: '/mycheck',
 					name: 'mycheck',
 					component: MyCheck
+				}, {
+					path: '/detail/:id',
+					name: 'detail',
+					component: Detail
 				},
 			]
 		});

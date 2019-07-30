@@ -14,69 +14,6 @@
   box-sizing: border-box;
 }
 
-.zmiti-index-main-ui .zmiti-preview {
-  background-image: url(chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/phone.png);
-  width: 360px;
-  height: 648px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content {
-  width: 90%;
-  height: 570px;
-  position: absolute;
-  left: 4.5%;
-  top: 5%;
-  overflow: auto;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content h2 {
-  width: 90%;
-  margin: 20px auto;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content .zmiti-article-date {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  display: -webkit-flex;
-  flex-flow: row;
-  justify-content: space-between;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content .zmiti-article-date div {
-  font-size: 12px !important;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content .zmiti-article-remark {
-  width: 90%;
-  background: rgba(163, 205, 255, 0.15);
-  margin: 20px auto;
-  font-size: 14px;
-  line-height: 24px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content .zmiti-article-content {
-  width: 90%;
-  margin: 0 auto;
-  font-size: 14px;
-  line-height: 24px;
-}
-
-.zmiti-index-main-ui .zmiti-preview-content .zmiti-article-content img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-}
-
 .zmiti-index-main-ui .zmiti-title {
   height: 80px;
   line-height: 140px;

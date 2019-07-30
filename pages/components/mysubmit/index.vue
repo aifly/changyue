@@ -6,7 +6,7 @@
 		<div class="lt-full" v-if='dataSource.some(item=>{ return item.showConfirm})' @click="clearConfirm"></div>
 		<h2 class='zmiti-title'>我的提交</h2>
 		<div class='zmiti-scroll' :style="{height:viewH - 140+'px'}">
-			<div v-if='dataSource.length<=0' style="width:100%;text-align:center">loading....</div>
+			<div v-if='isLoading' style="width:100%;text-align:center">loading....</div>
 			<div v-else v-for='(item,i) in dataSource' :key="i" class='zmiti-submit-list'>
 				<div>
 					<div>提交时间：</div>
@@ -70,6 +70,7 @@
 		data(){
 			return{
 				manuscriptStatus,
+				isLoading:true,
 				dataSource:[],
 				viewH:window.innerHeight,
 				condition:{
@@ -144,14 +145,10 @@
 						condition
 					},
 					success(data){
-						s.loading = false;
+					
 						if(data.getret === 0){
 							s.dataSource = data.list;
-							s.dataSource = s.dataSource.concat(data.list);
-							s.dataSource = s.dataSource.concat(data.list);
-							s.dataSource = s.dataSource.concat(data.list);
-							s.dataSource = s.dataSource.concat(data.list);
-							s.dataSource = s.dataSource.concat(data.list);
+							s.isLoading = false;
 						}
 					}
 				})

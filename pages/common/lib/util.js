@@ -1,5 +1,5 @@
 import zmitiActions from '../action.js';
-
+import   './qrcode';
 
 var zmitiUtil = {
 	userActions: zmitiActions.userActions,
@@ -11,6 +11,19 @@ var zmitiUtil = {
 	cityActions: zmitiActions.cityActions,
 	companyAdminActions: zmitiActions.companyAdminActions,
 	changYueAcions: zmitiActions.changYueAcions,
+
+	createQrCode(container, url) {
+		//实例化
+		var qrcode = new QRCode(
+			//二维码存放的div
+			container, {
+				width: 150, //设置宽高
+				height: 150
+			}
+		);
+		//根据input框的值生成二维码
+		qrcode.makeCode(url);
+	},
 
 	formatDate(inputTime,flag = false){
 		var date = new Date(inputTime * 1000);

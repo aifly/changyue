@@ -18,7 +18,12 @@
 				<div class='zmiti-login-btn' @click='login'>登录</div>
 			</div>
 		</div>
+
+		<div class='zmiti-qrcode-page' v-if='showQRCodePage'>
+			<div ref='container'></div>
+		</div>
 	</div>
+
 </template>
 
 <script>
@@ -32,6 +37,7 @@
 		name:'zmitiindex',
 		data(){
 			return{
+				showQRCodePage:false,
 				errMsg:"",
 				viewH:document.documentElement.clientHeight,
 				username:window.localStorage.getItem('cy-username'),
@@ -69,7 +75,6 @@
 							window.localStorage.setItem('login', JSON.stringify(data));
 							window.localStorage.setItem('cy-username', username);
 							window.localStorage.setItem('cy-password', password);
-							console.log(data);
 							var companyList = data.info.company_list;
 							if(companyList.length<=0){
 								alert('你还没有绑定单位');
@@ -79,7 +84,16 @@
 								window.localStorage.setItem('currentCompany',JSON.stringify(companyList[0]));
 								
 							}
-							s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
+							if(data.info.wechat_auth_url){
+
+								s.showQRCodePage = true;
+
+								setTimeout(() => {
+									zmitiUtil.createQrCode(s.$refs['container'],data.info.wechat_auth_url);
+								}, 10);
+							}
+
+							//s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
 						}else{
 							s.errMsg = data.msg;
 							setTimeout(() => {

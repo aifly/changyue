@@ -8,29 +8,15 @@
 		</div>
 		<template v-if='!showCheckedUser'>
 			<h2 class='zmiti-title'>内容抓取</h2>
-			<div class="zmiti-preview">
-				<div class='zmiti-preview-content zmiti-scroll'>
-					<h2 class='zmiti-article-title'>
-						{{title}}
-					</h2>
-					<div class='zmiti-article-date'>
-						<div>
-							{{author + " ("+ docRelTime +") "}}
-						</div>
-						<div>
-							{{docSourceName}}
-						</div>
-					</div>
+			<Preview
+				:title='title'
+				:author='author'
+				:docRelTime='docRelTime'
+				:docSourceName='docSourceName'
+				:desc='desc'
+				:content='content.innerHTML'
 
-					<div class='zmiti-article-remark' v-html='desc'>
-						
-					</div>
-					<div class='zmiti-article-content' ref='content' v-html='content.innerHTML'>
-						
-					</div>
-				</div>
-			</div>
-
+			></Preview>
 			<div class='zmiti-checked-userlist'>
 				<h3>已选审核人：</h3>
 				<div @click="showCheckedUser = true">
@@ -88,7 +74,7 @@
 	import Vue from 'vue';
 	
 	import '../../common/directive';
-	var json = {};
+	import Preview from '../../common/preview';
 	export default {
 		props:[],
 		name:'zmitiindex',
@@ -113,6 +99,7 @@
 			}
 		},
 		components:{
+			Preview
 		},
 
 		beforeCreate(){
@@ -204,13 +191,15 @@
 				var content = this.$refs['content'];
 				[...content.querySelectorAll("img")].forEach((img)=>{
 					//FCK__PageBreak为分页组件。过滤掉
-					if(img.className !== 'FCK__PageBreak' && img.getAttribute('src').indexOf('http')<=-1){//过滤掉分页图片和外网图片
+					if(img.className !== 'FCK__PageBreak'){//过滤掉分页图片和外网图片
 						set.add(img.src);
 					}
 				});
 				var {host} = Vue;
 				let tasks = [];
 				var urls = [...set];
+
+				console.log(urls);
 				urls.forEach((url,i)=>{
 					let iNow = i;
 					var p1 = new Promise((resolve,reject)=>{
@@ -220,33 +209,40 @@
 							canvas.width = img.width;
 							canvas.height = img.height;
 							var context = canvas.getContext('2d');
-							context.drawImage(img,0,0);
 							resolve();
-							var p2 = new Promise((res,rej)=>{
-								zmitiUtil.ajax({
-									remark:'userUploadByBase64',
-				 					_ui:{
-										type:2
-									},
-									data:{
-										action:resourceActions.userUploadByBase64.action,
-										base64:canvas.toDataURL()
-									},
-									success(data){
-										if(data.getret === 0||data.getret === 1){
-											var src = host + data.filepath;
-											[...content.querySelectorAll("img")].forEach((img,i)=>{
-												if(img.src === url){
-													content.querySelectorAll("img")[i].src = src;
-												}
-											})
-											res();
+							try {
+								context.drawImage(img,0,0);
+								var base64 = canvas.toDataURL();
+								var p2 = new Promise((res,rej)=>{
+									zmitiUtil.ajax({
+										remark:'userUploadByBase64',
+										_ui:{
+											type:2
+										},
+										data:{
+											action:resourceActions.userUploadByBase64.action,
+											base64
+										},
+										error(){
+											
+										},
+										success(data){
+											if(data.getret === 0||data.getret === 1){
+												var src = host + data.filepath;
+												[...content.querySelectorAll("img")].forEach((img,i)=>{
+													if(img.src === url){
+														content.querySelectorAll("img")[i].src =  src;
+													}
+												})
+												res();
+											}
 										}
-									}
+									});
 								});
-							});
-							tasks.push(p2);
-
+								tasks.push(p2);
+							} catch (error) {
+							}
+							
 							if(iNow === urls.length -1){
 								
 								Promise.all(tasks).then(()=>{
@@ -268,8 +264,7 @@
 			submit(cmsid){
 				let {obserable} = Vue;
 				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
-				var frame = document.querySelector('#_trs_editor_');
-				var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
+				var content = this.$refs['content'];
 				this.content = content;
 
 				var companyid = zmitiUtil.getCurrentCompanyId();;
