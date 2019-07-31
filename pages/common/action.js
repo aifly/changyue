@@ -345,6 +345,14 @@ let resourceActions = {
 	userUploadByBase64: {
 		desc: '用户通过base64上传图片',
 		action: '3001325'
+	},
+	watchHand:{
+		desc:"握手",
+		action:'10000000'
+	},
+	heartBeat:{
+		desc:'心跳',
+		action:'500'
 	}
 
 };

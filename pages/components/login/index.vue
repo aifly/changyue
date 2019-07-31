@@ -84,7 +84,8 @@
 								window.localStorage.setItem('currentCompany',JSON.stringify(companyList[0]));
 								
 							}
-							if(data.info.wechat_auth_url){
+							zmitiUtil.listener();
+							if(data.info.wechat_auth_url && false){
 
 								s.showQRCodePage = true;
 
@@ -93,7 +94,7 @@
 								}, 10);
 							}
 
-							//s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
+							s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
 						}else{
 							s.errMsg = data.msg;
 							setTimeout(() => {

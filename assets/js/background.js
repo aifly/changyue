@@ -7,6 +7,7 @@ chrome.contextMenus.create({
 	"contexts": ["page", "frame", "selection"],
 	"onclick": function (info, tab) {
 		chrome.tabs.query({ active: true, currentWindow: true }, function (tab) {
+			
 			chrome.tabs.sendMessage(tab[0].id, { data: 1 }, function (response) {
 				
 			});

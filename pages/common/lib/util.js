@@ -100,6 +100,45 @@ var zmitiUtil = {
 	getProductListByAdmin() {
 
 	},
+
+	heart(){
+		var { userid, token } = this.getUserInfo().ui;
+		var { socket} = this;
+		setTimeout(() => {
+			var json = JSON.stringify({ action: 500, ui: { userid: userid, token: token } })
+			socket.send(json);
+		}, 10*1000);
+	},
+
+	listener(){
+
+		var { userid ,token} = this.getUserInfo().ui;
+		
+
+		var socket = new WebSocket("ws://newapi.zmiti.com:50294");
+
+		socket.onopen = function () {
+			var json = JSON.stringify({ action: 10000000, ui: { userid: userid, token: token } })
+			socket.send(json);
+		};
+		this.socket = socket;
+		this.heart();
+
+		socket.onmessage =  (evt)=> {
+			var data = JSON.parse(evt.data);
+			console.log(data);
+			if(data.action === 0 || data.action === 9995){//提示并退出
+				
+			}
+			else if(data.action === 500){
+				this.heart();
+			}
+		};
+		
+	},
+	notify(){
+		
+	},
 	getProductList(fn) { //
 
 		this.ajax({
@@ -137,6 +176,7 @@ var zmitiUtil = {
 			console.log(data.data);
 		})
 	},
+	baseUrl: 'http://newapi.zmiti.com',
 	ajax(option, adminErrorFn) {
 
 
@@ -147,7 +187,7 @@ var zmitiUtil = {
 		if (userInfo && userInfo.ui) {
 			opt.ui = Object.assign(userInfo.ui, _ui);
 		}
-		var  baseUrl = 'http://newapi.zmiti.com'
+		var  baseUrl = this.baseUrl;
 		$.ajax({
 			type:'post',
 			url:baseUrl + '?name=' + (option.remark || '').toLowerCase(),

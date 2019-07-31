@@ -41,6 +41,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	
 	var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
 	zmitiObj.content = content.innerHTML; */
+	console.log(request);
 	sendResponse(123);
 	init();
 });
