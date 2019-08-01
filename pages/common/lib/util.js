@@ -128,17 +128,19 @@ var zmitiUtil = {
 		socket.onmessage =  (evt)=> {
 			var data = JSON.parse(evt.data);
 			console.log(data);
+			if(data.getret === 0){
 
-			if(data.getret === 0 || data.getret === 9995){//提示并退出
-				
-			}
-			else if (data.getret === 9000001){//授权成功，关闭二维码页面
-				Vue.obserable.trigger({
-					type:'closeQrcodePage'
-				});
-			}
-			else if(data.getret === 500){
-				this.heart();
+				if(data.action === 0 || data.action === 9995){//提示并退出
+					
+				}
+				else if (data.action === 90000001){//授权成功，关闭二维码页面
+					Vue.obserable.trigger({
+						type:'closeQrcodePage'
+					});
+				}
+				else if(data.action === 500){
+					this.heart();
+				}
 			}
 		};
 		
