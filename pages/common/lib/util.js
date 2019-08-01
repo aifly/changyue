@@ -1,5 +1,6 @@
 import zmitiActions from '../action.js';
 import   './qrcode';
+import Vue from 'vue';
 
 var zmitiUtil = {
 	userActions: zmitiActions.userActions,
@@ -127,18 +128,22 @@ var zmitiUtil = {
 		socket.onmessage =  (evt)=> {
 			var data = JSON.parse(evt.data);
 			console.log(data);
-			if(data.action === 0 || data.action === 9995){//提示并退出
+
+			if(data.getret === 0 || data.getret === 9995){//提示并退出
 				
 			}
-			else if(data.action === 500){
+			else if (data.getret === 9000001){//授权成功，关闭二维码页面
+				Vue.obserable.trigger({
+					type:'closeQrcodePage'
+				});
+			}
+			else if(data.getret === 500){
 				this.heart();
 			}
 		};
 		
 	},
-	notify(){
-		
-	},
+
 	getProductList(fn) { //
 
 		this.ajax({

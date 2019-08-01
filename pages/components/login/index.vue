@@ -55,6 +55,11 @@
 			if(this.username && this.password){
 				//this.login();
 			}
+
+			Vue.obserable.on('closeQrcodePage',()=>{
+				this.showQRCodePage = false;
+				this.$router.push({path:this.companyList.length<=1?"/nav":'/company/'});
+			})
 		},
 		
 		methods:{
@@ -76,7 +81,8 @@
 							window.localStorage.setItem('cy-username', username);
 							window.localStorage.setItem('cy-password', password);
 							var companyList = data.info.company_list;
-							if(companyList.length<=0){
+							s.companyList = companyList;
+							if(companyList.length <= 0){
 								alert('你还没有绑定单位');
 								return;
 							}
@@ -85,16 +91,16 @@
 								
 							}
 							zmitiUtil.listener();
-							if(data.info.wechat_auth_url && false){
-
+							if(data.info.wechat_auth_url){
 								s.showQRCodePage = true;
-
 								setTimeout(() => {
 									zmitiUtil.createQrCode(s.$refs['container'],data.info.wechat_auth_url);
 								}, 10);
 							}
+							else{
+								s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
+							}
 
-							s.$router.push({path:companyList.length<=1?"/nav":'/company/'});
 						}else{
 							s.errMsg = data.msg;
 							setTimeout(() => {

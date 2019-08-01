@@ -11,6 +11,8 @@
 	 z-index: 10;
 	 @include displayFlex(row);
 	 div{
+		padding: 4px;
+		background: #fff;
 		 width: 150px;
 		 height: 150px;
 		 @include pos(a);

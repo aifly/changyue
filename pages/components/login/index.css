@@ -17,6 +17,8 @@
 }
 
 .zmiti-qrcode-page div {
+  padding: 4px;
+  background: #fff;
   width: 150px;
   height: 150px;
   position: absolute;
