@@ -13,13 +13,13 @@ var zmitiUtil = {
 	companyAdminActions: zmitiActions.companyAdminActions,
 	changYueAcions: zmitiActions.changYueAcions,
 
-	createQrCode(container, url) {
+	createQrCode(container, url,size=150) {
 		//实例化
 		var qrcode = new QRCode(
 			//二维码存放的div
 			container, {
-				width: 150, //设置宽高
-				height: 150
+				width: size, //设置宽高
+				height: size
 			}
 		);
 		//根据input框的值生成二维码
@@ -102,6 +102,17 @@ var zmitiUtil = {
 
 	},
 
+	randomString(len) {
+		var len = len || 32;
+		var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+		var maxPos = $chars.length;
+		var pwd = '';
+		for (var i = 0; i < len; i++) {
+			pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+		}
+		return pwd;
+	},
+
 	heart(){
 		var { userid, token } = this.getUserInfo().ui;
 		var { socket} = this;
@@ -111,17 +122,74 @@ var zmitiUtil = {
 		}, 10*1000);
 	},
 
-	listener(){
-
-		var { userid ,token} = this.getUserInfo().ui;
+	getTempToken(token){
+		if (!this.socket){
+			this.socket = new WebSocket("ws://newapi.zmiti.com:50294");
+			
+			var { socket } = this;
+			this.socket.onopen = function () {
+				
+				var json = JSON.stringify({ action: zmitiActions.userActions.getTempToken.action, client_token: token });
+				
+				socket.send(json);
+			};
+			this.heart();
+			this.socket.onmessage = (evt) => {
+				var data = JSON.parse(evt.data);
+				console.log(data,'===');
+				
+				switch (data.action) {
+					case 0:
+					case 9995:
+						//提示并退出
+						break;
+					case 90000001://授权成功。
+						if(data.getret === 0){
+							Vue.obserable.trigger({
+								type: 'closeQrcodePage'
+							});
+						}
+						break;
+					case 90000002:
+						Vue.obserable.trigger({
+							type: 'loginSuccess',
+							data
+						});
+						break;
+					case 500:
+						this.heart();
+						break;
+					default:
+						break;
+				}
+			};
+		}else{
 		
 
+		}
+		
+		
+	},
+
+	listener(uid,tk){
+
+		var { userid ,token} = this.getUserInfo().ui;
+
+		if(!userid || !token){
+			userid = uid;
+			token = tk;
+		}
+		if (this.socket){
+			return;
+		}
+		
 		var socket = new WebSocket("ws://newapi.zmiti.com:50294");
 
 		socket.onopen = function () {
 			var json = JSON.stringify({ action: 10000000, ui: { userid: userid, token: token } })
 			socket.send(json);
 		};
+
 		this.socket = socket;
 		this.heart();
 
@@ -130,16 +198,24 @@ var zmitiUtil = {
 			console.log(data);
 			if(data.getret === 0){
 
-				if(data.action === 0 || data.action === 9995){//提示并退出
-					
-				}
-				else if (data.action === 90000001){//授权成功，关闭二维码页面
-					Vue.obserable.trigger({
-						type:'closeQrcodePage'
-					});
-				}
-				else if(data.action === 500){
-					this.heart();
+				switch (data.action) {
+					case 0:
+					case 9995:
+						//提示并退出
+						break;
+					case 90000001:
+						Vue.obserable.trigger({
+							type: 'closeQrcodePage'
+						});
+						break;
+					case 90000002:
+						alert('登录成功');
+						break;
+					case 500:
+						this.heart();
+						break;
+					default:
+						break;
 				}
 			}
 		};

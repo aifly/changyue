@@ -243,7 +243,20 @@ let userActions = {
 	getCMSList: {
 		desc: "获取CMS列表",
 		action: '2001915'
+	},
+	getWXCode:{
+		desc:'获取微信QRCode',
+		action:"2000099"
+	},
+	getTempToken:{
+		desc:'微信扫码绑定临时token',
+		action:'10000001'
+	},
+	getWXFollow:{
+		desc:'定时刷新获取微信关注',
+		action:'2000098'
 	}
+
 };
 
 let companyAdminActions = {

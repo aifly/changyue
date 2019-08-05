@@ -6,21 +6,78 @@
 	 width: 100%;
 	 height: 100%;
 	 background:rgba(0,0,0,.8);
+	  background: #108ee9;
 	 left: 0;
 	 top: 0;
-	 z-index: 10;
+	 z-index: 121;
 	 @include displayFlex(row);
-	 div{
-		padding: 4px;
-		background: #fff;
-		 width: 150px;
-		 height: 150px;
-		 @include pos(a);
-		 left: 50%;
-		 top:50%;
-		 margin: -75px;
-		
+	 align-items: center;
+	 justify-content: center;
+
+	 &>section{
+		 width: 80%;
+		 height: 70vh;
+		 h2{
+			 text-align: center;
+			 color:#fff;
+		 }
+		 .zmiti-qrcode-C{
+			 width: 100%;
+			 height: 40vh;
+			 background: #fff;
+			 @include br(4px);
+
+			 .zmiti-scan-tip{
+				 width: 100%;
+				 text-align: center;
+				 color:#000;
+				 height: 80px;
+				 line-height: 80px;
+			 }
+			 .zmiti-warning-tip{
+				width: 100%;
+				color:#f89058;
+				background: #fefcec;
+				text-indent: 1em;
+				margin:0 0 30px 0;
+				height: 30px;
+				line-height: 30px;
+				@include pos(r);
+				span{
+					@include pos(a);
+					right: 10px;
+					cursor: pointer;
+					font-size:20px;
+				}
+			 }
+			 .zmiti-qrcode-role{
+				width: 170px;
+				height: 170px;
+				padding: 2px;
+				border:1px solid #ddd;
+				margin: 0 auto;
+			 }
+			 .zmiti-logo{
+				 @include pos(a);
+				 $size:40px;
+				 width:$size;
+				 height: $size;
+				 left: 50%;;
+				 margin-left: -$size/2;
+				 margin-top: - (85+$size/2);
+				 background: #fff;
+				 img{
+					 width: 100%;
+				 }
+			 }
+			 .zmiti-sms-tip{
+				 color:#108ee9;
+				 text-align: center;
+				 margin: 20px 0;
+			 }
+		 }
 	 }
+	
  }
   .zmiti-login-C{
 		width: 80%;
@@ -48,12 +105,60 @@
 			background:#fff;
 			padding-bottom: 20px;
 			h3{
-				border-top: 4px solid $baseColor;
-				text-align: center;
-				height: 40px;
-				line-height: 40px;
-				font-size:14px;
 				
+				
+				text-align: center;
+				height: 44px;
+				line-height: 44px;
+				font-size:14px;
+				@include displayFlex(row);
+				justify-content: center;
+				cursor: pointer;
+				&>div{
+					flex:1;
+					background: #e5f0fd;
+					z-index: 120;
+					color:#000;
+					
+					&.active{
+						color:$baseColor;
+						@include pos(r);
+						background: #fff;
+						border-top: 4px solid $baseColor;
+						&:before{
+							display: none;
+							content:'';
+							width: 100%;
+							height: 0;
+							border-top: 4px solid $baseColor;
+							@include pos(a);
+							top: 0;
+							left: 0;
+						}
+					}
+				}
+				
+			}
+			.zmiti-login-qrcode{
+				
+				@include displayFlex(column);
+
+				align-items: center;
+
+				&>section{
+					width: 80%;
+					color:#f00;
+					line-height: 30px;
+					font-weight: bold;
+				}
+				div{
+					
+					width: 170px;
+					height: 170px;
+					padding: 4px;
+					margin: 0 auto;
+					border:1px solid #ddd;
+				}
 			}
 			.zmiti-login-input{
 				margin: 0 auto 10px;
