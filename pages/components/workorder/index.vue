@@ -1,19 +1,26 @@
 <template>
 	<div class="zmiti-workorder-main-ui lt-full">
-		<header class="zmiti-tab-header">
-			<div>提交工单</div>
-			<div>
-			</div>
-		</header>
-
+		<div class='zmiti-back' >
+			<router-link :to='"/nav"'></router-link>
+		</div>
+		<h2 class='zmiti-title'>工单<button type="button" class="ivu-btn ivu-btn-default" @click="openForm"><span>提交工单</span></button></h2>
 		<div class='zmiti-workorder-choose'>
 			<div class="zmiti-workorder-list" v-show="workorderstatus">
 				<header class='zmiti-workorder-header-bar'>
-					工单列表
+					工单列表					
 				</header>
+				<section>
+					<ul>
+						<li v-for="(item,index) in dataSource" :key="index">
+							<div class="items">
+								<div class="item-title">工单内容：</div>
+								<div class="item-content">{{item.content}}</div>
+							</div>
+						</li>
+					</ul>
+				</section>
 			</div>
-			<div class="zmiti-workorder-choose-inner" v-show="formstatus">
-				
+			<div class="zmiti-workorder-choose-inner" v-show="formstatus">				
 
 				<form class="ivu-form" :rules="ruleValidate" :model="formWorkOrder">
 					<div class="ivu-form-item">
@@ -97,6 +104,19 @@
 			return{
 				formstatus:false,//隐藏表单
 				workorderstatus:true,//显示工单列表
+				dataSource:[{
+					content:'工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1',
+					createtime:'2019-08-04',
+					status:0
+				},{
+					content:'工单的内容2',
+					createtime:'2019-08-05',
+					status:0
+				},{
+					content:'工单的内容3',
+					createtime:'2019-08-06',
+					status:0
+				}],
 				formWorkOrder:{
 					powerid:6,//默认类型
 					smstime:2,//接收时间
@@ -144,6 +164,10 @@
 						$Message[data.getret === 0 ? 'success':'error'](data.msg);
 					}
 				});
+			},
+			openForm(){
+				this.formstatus=true;
+				this.workorderstatus=false;
 			}
 		}
 	}

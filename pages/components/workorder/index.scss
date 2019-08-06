@@ -4,24 +4,55 @@ $baseColor: #fcffb4;
 $viewW: 750px;
 $color: #be0000;
 
-
+@mixin displayflex($k:row) {
+	display: flex;
+	-webkit-display: flex;
+	-moz-display: flex;
+	flex-direction: $k;
+	-webkit-flex-direction: $k;
+	-moz-flex-direction: $k;
+}
+@mixin flex($k:1) {
+	flex:$k;
+	-webkit-flex:$k;
+	-moz-flex:$k;
+}
 .zmiti-workorder-main-ui{
-	background:#fff;
-	padding: 10px;
-
+	* {
+	    box-sizing: border-box;
+	    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+	.zmiti-title{
+		position:relative;
+		.ivu-btn-default{
+			position:absolute;
+			right: 10px;
+			bottom: 0px;
+		}
+	}
 	.zmiti-workorder-choose{
 		width: 100%;
-		border:1px solid #ccc;
 		margin-top: 10px;
-		padding: 10px;
-		padding-bottom: 20px;
-		.zmiti-workorder-choose-inner{
-			padding-right:10px;
+		padding:0 10px;
+	}
+	.zmiti-workorder-list{
+		ul{
+			li{
+				.items{
+					@include displayflex();
+					color: #333333;
+					.item-title{
+						width:80px;
+						color:#999999;
+					}
+					.item-content{
+						@include flex();
+					}
+				}
+			}
 		}
-		* {
-		    box-sizing: border-box;
-		    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-		}
+	}
+			
 		.zmiti-workorder-header-bar{
 			text-indent: 1em;
 			font-size:14px;
@@ -245,6 +276,6 @@ $color: #be0000;
 		    background-color: #00c1de;
 		    border-color: #00c1de;
 		}
-	}
+
 	 
 }
