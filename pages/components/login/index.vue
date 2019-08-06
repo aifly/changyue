@@ -111,9 +111,11 @@
 							action:userActions.getWXFollow.action
 						},
 						success(data){
+							console.log(data,'---');
 							if(data.getret === 0){
 								clearInterval(t);
 								s.showQRCodePage = false;
+								s.$router.push({path:s.companyList.length<=1?"/nav":'/company/'});
 							}
 						}
 					});
@@ -176,10 +178,15 @@
 			},
 			createLoginQRCode(){
 				var s = this;
+				if(s.url){
+					return;
+				}
 				this.getWXCode(function(info){
+				
 					zmitiUtil.getTempToken(info.token);
 					s.$refs['loginqrcode'].innerHTML = '';
 					zmitiUtil.createQrCode(s.$refs['loginqrcode'],info.url,170);
+					s.url = s.$refs['loginqrcode'].querySelector('img').src;
 				},1)
 			},
 			getWXCode(fn,type=1){

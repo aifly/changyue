@@ -145,10 +145,10 @@ var zmitiUtil = {
 						break;
 					case 90000001://授权成功。
 						if(data.getret === 0){
-							Vue.obserable.trigger({
-								type: 'closeQrcodePage'
-							});
 						}
+						Vue.obserable.trigger({
+							type: 'closeQrcodePage'
+						});
 						break;
 					case 90000002:
 						Vue.obserable.trigger({
