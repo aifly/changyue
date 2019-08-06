@@ -13,7 +13,7 @@ import Password from './pages/components/password'
 import MySubmit from './pages/components/mysubmit'
 import MyCheck from './pages/components/mycheck'
 import Detail from './pages/components/detail';
-
+import WorkOrder from './pages/components/workorder';
 
 import './pages/common/css/index.css';
 Vue.use(VueRouter)
@@ -114,7 +114,11 @@ function init( ){
 					path: '/detail/:id',
 					name: 'detail',
 					component: Detail
-				},
+				},{
+					path:'/workorder',
+					name:'workorder',
+					component:WorkOrder
+				}
 			]
 		});
 		router.afterEach((to,from)=>{

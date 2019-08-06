@@ -7,61 +7,74 @@
 		</header>
 
 		<div class='zmiti-workorder-choose'>
-			<header class='zmiti-workorder-header-bar'>
-				咨询类工单问题
-			</header>
-			<template v-if='formWorkOrder.workordertype <= -1 && !formWorkOrder.productid'>
-				<ul >
-					<li v-for='(type ,i) of workOrderType' :key="i">
-						<div class='zmiti-workerorder-type-top'>
-							<div>{{type.type}}</div>
-							<div><Button @click="formWorkOrder.workordertype = i">提问</Button></div>
-						</div>
-						<div>
-							{{type.desc}}
-						</div>
-					</li>
-				</ul>
-				<header class='zmiti-workorder-header-bar' style='margin-top:30px;'>
-					产品类型工单问题
+			<div class="zmiti-workorder-list" v-show="workorderstatus">
+				<header class='zmiti-workorder-header-bar'>
+					工单列表
 				</header>
-				<ul>
-					<li v-for='(type ,i) of productionList' :key="i" style="background:#eee">
-						<div class='zmiti-workerorder-type-top zmiti-workerorder-type-top1'>
-							<div style='margin-right:30px;'>{{type.productname}}</div>
-							<div><Button @click="chooseOrderType(type)">提问</Button></div>
-						</div>
-						<div>
-							{{type.desc}}
-						</div>
-					</li>
-				</ul>
-			</template>
-			<Form :rules="ruleValidate"  style="padding-top:20px;width:90%;margin:0 auto;" v-else class='zmiti-add-form-C' :model="formWorkOrder" :label-width="100">
-				<FormItem label="问题描述：" prop='content'>
-					<Input :rows="4"  type='textarea' v-model="formWorkOrder.content" placeholder="问题描述：" />
-				</FormItem>
-				<FormItem label="手机号：" prop='usermobile'>
-					<Input v-model="formWorkOrder.usermobile" placeholder="手机号：" />
-				</FormItem>
+			</div>
+			<div class="zmiti-workorder-choose-inner" v-show="formstatus">
 				
-				<FormItem  label="接收短信时间：">
-					 <RadioGroup v-model="formWorkOrder.smstime">
-						<Radio :label="0">任意时间</Radio>
-						<Radio :label="1">每天9点~18点</Radio>
-						<Radio :label="2">从不接收</Radio>
-					</RadioGroup>
-				</FormItem>
-				<FormItem label="邮箱：" prop='useremail'>
-					<Input v-model="formWorkOrder.useremail" placeholder="邮箱：" />
-				</FormItem>
-				<FormItem  label="附件上传：">
-					 <Button icon='md-cloud-upload'>上传</Button>
-				</FormItem>
-				<FormItem  label="">
-					 <Button type='primary' @click="submitWorkOrder">提交</Button>
-				</FormItem>
-			</Form>
+
+				<form class="ivu-form" :rules="ruleValidate" :model="formWorkOrder">
+					<div class="ivu-form-item">
+						<label class="ivu-form-item-label">问题描述：</label>
+						<div class="ivu-form-item-content">
+							<div class="ivu-input-wrapper">
+								<textarea wrap="soft" autocomplete="off" spellcheck="false" rows="4" class="ivu-input" v-model="formWorkOrder.content"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="ivu-form-item">
+						<label class="ivu-form-item-label">手机号：</label>
+						<div class="ivu-form-item-content">
+							<div class="ivu-input-wrapper">
+								<input autocomplete="off" spellcheck="false" type="text" class="ivu-input ivu-input-default" v-model="formWorkOrder.usermobile">
+							</div>
+						</div>
+					</div>
+					<div class="ivu-form-item">
+						<label class="ivu-form-item-label">接收短信时间：</label>
+						<div class="ivu-form-item-content">
+							<div class="ivu-input-wrapper">
+								<div class="ivu-radio-group" v-model="formWorkOrder.smstime">
+									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default ivu-radio-wrapper-checked">
+									<span class="ivu-radio ivu-radio-checked">
+									<span class="ivu-radio-inner"></span>
+									<input type="radio" class="ivu-radio-input"></span>
+									任意时间</label>
+									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default">
+									<span class="ivu-radio">
+									<span class="ivu-radio-inner"></span>
+									<input type="radio" class="ivu-radio-input"></span>
+									每天9点~18点</label>
+									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default">
+									<span class="ivu-radio">
+									<span class="ivu-radio-inner"></span>
+									<input type="radio" class="ivu-radio-input"></span>
+									从不接收</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ivu-form-item">
+						<label class="ivu-form-item-label">邮箱：</label>
+						<div class="ivu-form-item-content">
+							<div class="ivu-input-wrapper">
+								<input autocomplete="off" spellcheck="false" type="email" class="ivu-input ivu-input-default" v-model="formWorkOrder.useremail">
+							</div>
+						</div>
+					</div>
+					<div class="ivu-form-item">
+						<label class="ivu-form-item-label"></label>
+						<div class="ivu-form-item-content">
+							<div class="ivu-input-wrapper">
+								<button type="button" class="ivu-btn ivu-btn-primary" @click="submitWorkOrder"><span>提交</span></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
 		</div>
 
 	</div>
@@ -69,7 +82,7 @@
 
 
 <style lang="scss" scoped>
-	@import './index.scss';
+@import './index.scss';
 </style>
 <script>
 	import zmitiUtil from '../../common/lib/util';
@@ -82,18 +95,15 @@
 		name:'zmitiindex',
 		data(){
 			return{
-
-				productionList:[],
+				formstatus:false,//隐藏表单
+				workorderstatus:true,//显示工单列表
 				formWorkOrder:{
-					workordertype:-1,
-					smstime:2,
-				 	productid:'',
-				},
-
-				imgs:window.imgs,
-				userinfo:{
-					username:'一位巨蟹',
-					avatar:window.imgs.zmiti1
+					powerid:6,//默认类型
+					smstime:2,//接收时间
+				 	productid:'1946048392',//畅阅产品
+				 	useremail:'',
+				 	usermobile:'',
+				 	content:''
 				},
 				ruleValidate: {
 					content: [
@@ -102,25 +112,7 @@
 					usermobile:[
 						{ required: true, message: '手机号不能为空', trigger: 'blur' }
 					]
-				},
-				workOrderType:[
-					{
-						type:'财务类',
-						desc:'订单，合同，充值，发票，汇款，等与资金相关问题'
-					},{
-						type:'会员帐号类',
-						desc:'更换用户信息，找回密码，空间，到期时间，用户数等相关'
-					},{
-						type:'定制服务类',
-						desc:'个性化定制，设计，规划及相关服务类问题'
-					},{
-						type:'产品技术类',
-						desc:'现有产品的所有技术相关问题及接口类问题'
-					},{
-						type:'其它类',
-						desc:'您无法判断的所有问题都可以此选择提问'
-					}
-				]
+				}
 			
 			}
 		},
@@ -129,44 +121,19 @@
 
 		beforeCreate(){
 			window.s = this;
-			//var validate = sysbinVerification.validate(this);
-			//zmitiUtil.clearCookie('login');
-
-			///this.validate = validate;
 		},
 		watch:{
 			
 		},
 		mounted(){
-			
-			
-			this.getProductList();
-
-			
-
-
-
+			this.userinfo = zmitiUtil.getUserInfo();
+			console.log(userActions.userCommitWorkOrder,'用户提交工单')
 		},
 		
 		methods:{
-			chooseOrderType(type){
-				
-				this.formWorkOrder.productid = type.productid
-				console.log(this.formWorkOrder,'this.formWorkOrder')
-			},
-			getProductList(){
-				zmitiUtil.getProductList((data)=>{
-					if(data.getret  === 0){
-						this.productionList = data.list;
-					}
-				})
-			},
 
 			submitWorkOrder(){//提交工单
-				if(this.formWorkOrder.workordertype === -1){
-					delete this.formWorkOrder.workordertype;
-				}
-				var {$Message} = this;
+				console.log(this.formWorkOrder,'this.formWorkOrder');
 				zmitiUtil.ajax({
 					remark:'userCommitWorkOrder',
 					data:{
@@ -175,14 +142,9 @@
 					},
 					success(data){
 						$Message[data.getret === 0 ? 'success':'error'](data.msg);
-						setTimeout(() => {
-							window.location.hash = '/workorderlist';
-						}, 1000);
 					}
 				});
 			}
-			
-			
 		}
 	}
 </script>
