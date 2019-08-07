@@ -1,16 +1,17 @@
 <template>
 	<div class="zmiti-workorder-main-ui lt-full">
-
-			<div class='zmiti-back' >
-				<router-link :to='"/nav"'></router-link>
+			<div class="zmiti-workorder-header">
+				<div class='zmiti-back' >
+					<router-link :to='"/nav"'></router-link>
+				</div>
+				<h2 class='zmiti-title'>工单
+					<button type="button" class="ivu-btn ivu-btn-default" @click="openForm">
+						<span v-show="toggleStatus==false">提交工单</span>
+						<span v-show="toggleStatus==true">工单列表</span>				
+					</button>
+				</h2>
 			</div>
-			<h2 class='zmiti-title'>工单
-				<button type="button" class="ivu-btn ivu-btn-default" @click="openForm">
-					<span v-show="toggleStatus==false">提交工单</span>
-					<span v-show="toggleStatus==true">工单列表</span>				
-				</button>
-			</h2>
-			<div class='zmiti-workorder-choose'>
+			<div class='zmiti-workorder-choose zmiti-scroll'>
 				<div class="zmiti-workorder-list" v-show="toggleStatus==false">
 					<header class='zmiti-workorder-header-bar'>
 						工单列表					

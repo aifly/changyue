@@ -18,14 +18,14 @@ $color: #be0000;
 	-moz-flex:$k;
 }
 .zmiti-workorder-main-ui{
-	width:80%;
-	margin:0 auto;
+	
 	height:100%;
-		position:relative;
-		z-index:1;
-		@include displayflex(column);
-	.zmiti-workorder-main-inner{
-
+	position:relative;
+	z-index:1;
+	@include displayflex(column);
+	.zmiti-workorder-header{
+		width:80%;
+		margin:0 auto;
 	}
 	* {
 	    box-sizing: border-box;
@@ -46,20 +46,6 @@ $color: #be0000;
 		margin-top: 10px;
 		padding:0 10px;
 		@include flex();
-		&::-webkit-scrollbar {
-		        width: 10px;
-		        height: 1px;
-		}
-		&::-webkit-scrollbar-thumb {
-	        border-radius: 10px;
-	        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-	        background: #535353;
-	    }
-		&::-webkit-scrollbar-track {
-	        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-	        border-radius: 10px;
-	        background: #EDEDED;
-		}
 	}
 	.zmiti-workorder-list{
 		ul{
