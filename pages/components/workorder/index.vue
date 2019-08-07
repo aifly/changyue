@@ -3,9 +3,14 @@
 		<div class='zmiti-back' >
 			<router-link :to='"/nav"'></router-link>
 		</div>
-		<h2 class='zmiti-title'>工单<button type="button" class="ivu-btn ivu-btn-default" @click="openForm"><span>提交工单</span></button></h2>
+		<h2 class='zmiti-title'>工单
+			<button type="button" class="ivu-btn ivu-btn-default" @click="openForm">
+				<span v-show="toggleStatus==false">提交工单</span>
+				<span v-show="toggleStatus==true">工单列表</span>				
+			</button>
+		</h2>
 		<div class='zmiti-workorder-choose'>
-			<div class="zmiti-workorder-list" v-show="workorderstatus">
+			<div class="zmiti-workorder-list" v-show="toggleStatus==false">
 				<header class='zmiti-workorder-header-bar'>
 					工单列表					
 				</header>
@@ -16,18 +21,29 @@
 								<div class="item-title">工单内容：</div>
 								<div class="item-content">{{item.content}}</div>
 							</div>
+							<div class="items">
+								<div class="item-title">时间：</div>
+								<div class="item-content">{{item.createtime | formatDate}}</div>
+							</div>
+							<div class="items">
+								<div class="item-title">状态：</div>
+								<div class="item-content">
+									{{orderStatus[item.status].status}}
+								</div>
+							</div>
 						</li>
 					</ul>
 				</section>
 			</div>
-			<div class="zmiti-workorder-choose-inner" v-show="formstatus">				
+			<div class="zmiti-workorder-choose-inner" v-show="toggleStatus==true">				
 
-				<form class="ivu-form" :rules="ruleValidate" :model="formWorkOrder">
+				<form class="ivu-form" :model="formWorkOrder">
 					<div class="ivu-form-item">
 						<label class="ivu-form-item-label">问题描述：</label>
 						<div class="ivu-form-item-content">
 							<div class="ivu-input-wrapper">
 								<textarea wrap="soft" autocomplete="off" spellcheck="false" rows="4" class="ivu-input" v-model="formWorkOrder.content"></textarea>
+								<div class="ivu-form-item-error-tip" v-if="formcontentstatus===true">问题描述不能为空</div>
 							</div>
 						</div>
 					</div>
@@ -36,6 +52,7 @@
 						<div class="ivu-form-item-content">
 							<div class="ivu-input-wrapper">
 								<input autocomplete="off" spellcheck="false" type="text" class="ivu-input ivu-input-default" v-model="formWorkOrder.usermobile">
+								<div class="ivu-form-item-error-tip" v-if="formmobilestatus===true">{{mobileMsg}}</div>
 							</div>
 						</div>
 					</div>
@@ -43,21 +60,23 @@
 						<label class="ivu-form-item-label">接收短信时间：</label>
 						<div class="ivu-form-item-content">
 							<div class="ivu-input-wrapper">
-								<div class="ivu-radio-group" v-model="formWorkOrder.smstime">
-									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default ivu-radio-wrapper-checked">
-									<span class="ivu-radio ivu-radio-checked">
+								<div class="ivu-radio-group">
+									<label :class="['ivu-radio-wrapper','ivu-radio-group-item','ivu-radio-default']" @click="radioHandle(0)">
+									<span :class="['ivu-radio',{'ivu-radio-checked':formWorkOrder.smstime===0}]">
 									<span class="ivu-radio-inner"></span>
-									<input type="radio" class="ivu-radio-input"></span>
+									<input type="radio" class="ivu-radio-input" value="0" v-model="formWorkOrder.smstime"></span>
 									任意时间</label>
-									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default">
-									<span class="ivu-radio">
+
+									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default" @click="radioHandle(1)">
+									<span :class="['ivu-radio',{'ivu-radio-checked':formWorkOrder.smstime===1}]">
 									<span class="ivu-radio-inner"></span>
-									<input type="radio" class="ivu-radio-input"></span>
+									<input type="radio" class="ivu-radio-input" value="1" v-model="formWorkOrder.smstime"></span>
 									每天9点~18点</label>
-									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default">
-									<span class="ivu-radio">
+
+									<label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-default" @click="radioHandle(2)">
+									<span :class="['ivu-radio',{'ivu-radio-checked':formWorkOrder.smstime===2}]">
 									<span class="ivu-radio-inner"></span>
-									<input type="radio" class="ivu-radio-input"></span>
+									<input type="radio" class="ivu-radio-input" value="2" v-model="formWorkOrder.smstime"></span>
 									从不接收</label>
 								</div>
 							</div>
@@ -68,6 +87,7 @@
 						<div class="ivu-form-item-content">
 							<div class="ivu-input-wrapper">
 								<input autocomplete="off" spellcheck="false" type="email" class="ivu-input ivu-input-default" v-model="formWorkOrder.useremail">
+								<div class="ivu-form-item-error-tip" v-if="formemailstatus===true">{{emailMsg}}</div>
 							</div>
 						</div>
 					</div>
@@ -87,7 +107,9 @@
 	</div>
 </template>
 
-
+<style type="text/css">
+.zmiti-changyue-main-ui .zmiti-dialog-close{z-index:99;}
+</style>
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
@@ -102,8 +124,15 @@
 		name:'zmitiindex',
 		data(){
 			return{
-				formstatus:false,//隐藏表单
-				workorderstatus:true,//显示工单列表
+				toggleStatus:false,
+				formcontentstatus:false,
+				formmobilestatus:false,
+				formemailstatus:false,
+				mobileMsg:'手机号不能为空',
+				condition:{
+					page_index:0,
+					page_size:10,
+				},
 				dataSource:[{
 					content:'工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1工单的内容1',
 					createtime:'2019-08-04',
@@ -118,20 +147,29 @@
 					status:0
 				}],
 				formWorkOrder:{
-					powerid:6,//默认类型
+					//powerid:6,//默认类型
 					smstime:2,//接收时间
 				 	productid:'1946048392',//畅阅产品
 				 	useremail:'',
 				 	usermobile:'',
 				 	content:''
 				},
-				ruleValidate: {
-					content: [
-						{ required: true, message: '问题描述不能为空', trigger: 'blur' }
-					],
-					usermobile:[
-						{ required: true, message: '手机号不能为空', trigger: 'blur' }
-					]
+				orderStatus:{
+					0: {
+						status: '已禁用'
+					},
+					1:{
+						status:'已受理'
+					},
+					2:{
+						status:'已处理'
+					},
+					3:{
+						status:'已确认'
+					},
+					4:{
+						status:'已评价'
+					}
 				}
 			
 			}
@@ -147,29 +185,95 @@
 		},
 		mounted(){
 			this.userinfo = zmitiUtil.getUserInfo();
-			console.log(userActions.userCommitWorkOrder,'用户提交工单')
+			this.getDataList();
+			//console.log(userActions,'userActions')
 		},
 		
 		methods:{
-
+			getDataList(){//工单列表
+				zmitiUtil.ajax({
+					remark:'getUserWorkOrderList',
+					data:{
+						action:userActions.getUserWorkOrderList.action,
+						condition:this.condition
+					},
+					success(data){
+						if(data.getret === 0){
+							//console.log(data.list);
+							s.dataSource = data.list;
+						}
+					}
+				})
+			},
 			submitWorkOrder(){//提交工单
-				console.log(this.formWorkOrder,'this.formWorkOrder');
+				//console.log(this.formWorkOrder,'this.formWorkOrder');
+				var s = this;
 				zmitiUtil.ajax({
 					remark:'userCommitWorkOrder',
 					data:{
 						action:userActions.userCommitWorkOrder.action,
-						info:this.formWorkOrder
+						info:s.formWorkOrder
 					},
 					success(data){
-						$Message[data.getret === 0 ? 'success':'error'](data.msg);
+						if(data.getret===0){
+							s.formstatus=false;
+							s.workorderstatus=true;
+							s.toggleStatus=false;
+							s.formWorkOrder={
+								smstime:2,
+							 	productid:'1946048392',
+							 	useremail:'',
+							 	usermobile:'',
+							 	content:''
+							}
+						}else if(data.getret===4){
+							console.log('没有问题描述');
+							s.formcontentstatus=true;
+						}else if(data.getret===6){
+							console.log('没有手机号');
+							s.formcontentstatus=false;
+							s.formmobilestatus=true;
+							s.formcontentstatus=false;
+						}else if(data.getret===7){
+							s.formmobilestatus=true;
+							s.formcontentstatus=false;
+							s.mobileMsg='手机号格式有误';
+						}else if(data.getret===9){
+							s.formmobilestatus=false;
+							s.formcontentstatus=false;
+							s.formemailstatus=true;
+							s.emailMsg='邮箱格式有误';
+						}else{
+							s.formemailstatus=false;
+							s.formcontentstatus=false;
+						}
 					}
 				});
 			},
 			openForm(){
-				this.formstatus=true;
-				this.workorderstatus=false;
+				this.toggleStatus=!this.toggleStatus;
+			},
+			radioHandle(val){
+				this.formWorkOrder.smstime=val;
 			}
-		}
+		},
+		filters: {
+	        formatDate: function (value) {
+				let date = new Date(value*1000);
+				let y = date.getFullYear();
+				let MM = date.getMonth() + 1;
+				MM = MM < 10 ? ('0' + MM) : MM;
+				let d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				let h = date.getHours();
+				h = h < 10 ? ('0' + h) : h;
+				let m = date.getMinutes();
+				m = m < 10 ? ('0' + m) : m;
+				let s = date.getSeconds();
+				s = s < 10 ? ('0' + s) : s;
+				return y + '-' + MM + '-' + d + ' ' + h +':'+m+':'+s;
+		    }
+	    }
 	}
 </script>
  
