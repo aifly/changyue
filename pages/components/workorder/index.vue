@@ -217,6 +217,7 @@
 							 	usermobile:'',
 							 	content:''
 							}
+							s.getDataList();
 						}else if(data.getret===4){
 							console.log('没有问题描述');
 							s.formcontentstatus=true;
