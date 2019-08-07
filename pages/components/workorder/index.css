@@ -4,7 +4,7 @@
     box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
 }*/
 .zmiti-workorder-main-ui {
-  width: 99%;
+  width: 80%;
   margin: 0 auto;
   height: 100%;
   position: relative;
@@ -253,5 +253,9 @@
     padding-top: 6px;
     color: #f30;
     font-size: 12px; }
+  .zmiti-workorder-main-ui .zmiti-back {
+    top: 16.5px; }
+  .zmiti-workorder-main-ui .zmiti-changyue-main-ui .zmiti-dialog-close {
+    z-index: 99; }
 
 /*# sourceMappingURL=index.css.map */

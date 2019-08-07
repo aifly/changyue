@@ -18,12 +18,15 @@ $color: #be0000;
 	-moz-flex:$k;
 }
 .zmiti-workorder-main-ui{
-	width:99%;
+	width:80%;
 	margin:0 auto;
 	height:100%;
-	position:relative;
-	z-index:1;
-	@include displayflex(column);
+		position:relative;
+		z-index:1;
+		@include displayflex(column);
+	.zmiti-workorder-main-inner{
+
+	}
 	* {
 	    box-sizing: border-box;
 	    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -295,5 +298,7 @@ $color: #be0000;
 		    padding-top: 6px;
 		    color: #f30;
 		    font-size:12px;
-		}	 
+		}
+		.zmiti-back{top:16.5px;}
+		.zmiti-changyue-main-ui .zmiti-dialog-close{z-index:99;}
 }
