@@ -16,7 +16,16 @@ $baseColor:#3390ff;
 		line-height: 140px;
 	}
 
-	
+	.zmiti-check-btn{
+		width: 120px;
+		height: 40px;
+		background: $baseColor;
+		color:#fff;
+		text-align: center;
+		line-height: 40px;
+		margin: 20px auto;
+		cursor: pointer;
+	}
 	.zmiti-submit-btn{
 		width: 120px;
 		height: 40px;

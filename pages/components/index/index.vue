@@ -54,9 +54,10 @@
 						<li @click="toggleCheckUser(item,k,'add',checkuser)" v-for='(item,k) of checkuser.list' :key="k" title='点击选择'>
 							{{item.realname}}
 						</li>
-						
 					</ul>
 				</div>
+
+				<div class='zmiti-check-btn' v-press @click="sure">确定</div>
 			</div>
 		</div>
 		</template>
@@ -103,7 +104,6 @@
 		},
 
 		beforeCreate(){
-			 
 		},
 		watch:{
 			
@@ -114,6 +114,7 @@
 		  this.getCheckUserList();
 		  this.company_list = this.userinfo.info.company_list;
 
+		
 
 		  	var frame = document.querySelector('#_trs_editor_');
 			var descObj = document.querySelector('#basicprops .attr_textarea textarea');
@@ -151,6 +152,12 @@
 		},
 		
 		methods:{
+			sure(){
+				if(this.defaultCheckedUser.length<=0){
+					return;
+				}
+				this.showCheckedUser = false
+			},
 			submitDoc(){
 				if(this.isSubmiting){
 					return;
@@ -165,6 +172,7 @@
 				var currentCms = zmitiUtil.getCurrentCMS();
 
 				if(!currentCms || !currentCms.cmsid){
+					
 					this.$router.push({path:'/setting/index'});
 					return;
 				}
@@ -188,7 +196,7 @@
 
 				var set = new Set();
 
-				var content = this.$refs['content'];
+				var content = document.querySelector('.zmiti-article-content');
 				[...content.querySelectorAll("img")].forEach((img)=>{
 					//FCK__PageBreak为分页组件。过滤掉
 					if(img.className !== 'FCK__PageBreak'){//过滤掉分页图片和外网图片
@@ -264,7 +272,7 @@
 			submit(cmsid){
 				let {obserable} = Vue;
 				var {title,author,docRelTime,docSourceName,desc,content,docid,defaultCheckedUser} = this;
-				var content = this.$refs['content'];
+				var content = document.querySelector('.zmiti-article-content');
 				this.content = content;
 
 				var companyid = zmitiUtil.getCurrentCompanyId();;

@@ -24,5 +24,16 @@ $baseColor:#3390ff;
 	}
 	
 
+	.zmiti-setting-ok{
+		width: 120px;
+		height: 40px;
+		background: $baseColor;
+		color:#fff;
+		text-align: center;
+		line-height: 40px;
+		margin: 20px auto;
+		cursor: pointer;
+	}
+
 }
 

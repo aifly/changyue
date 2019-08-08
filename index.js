@@ -127,7 +127,7 @@ function init( ){
 
 				var cms = zmitiUtil.getCurrentCMS();
 				if(!cms || !cms.cmsid){
-					router.push({path:'/setting'});
+					router.push({path:'/setting/index'});
 				}
 			}
 		})

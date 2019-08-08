@@ -26,3 +26,14 @@
   z-index: 10;
   position: absolute;
 }
+
+.zmiti-setting-main-ui .zmiti-setting-ok {
+  width: 120px;
+  height: 40px;
+  background: #3390ff;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  margin: 20px auto;
+  cursor: pointer;
+}

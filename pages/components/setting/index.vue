@@ -34,6 +34,10 @@
 				</li>
 			</ul>
 		</div>
+
+		<div class='zmiti-setting-ok' v-press @click='sure'>
+			确定
+		</div>
 	</div>
 </template>
 
@@ -82,12 +86,19 @@
 			 
 		  this.userinfo = zmitiUtil.getUserInfo();
 		  this.getCMSList();
-
-		  
 		
 		},
 		
 		methods:{
+			sure(){
+				var cms = zmitiUtil.getCurrentCMS();
+				if(!cms || !cms.cmsid){
+					return;
+				}
+				else{
+					this.$router.push({path:this.$route.params.id?"/"+this.$route.params.id:"/nav"});
+				}
+			},
 			getVersion(version,index){
 				this.showVerion = false;
 				this.version = version;

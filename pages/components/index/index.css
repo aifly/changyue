@@ -19,6 +19,17 @@
   line-height: 140px;
 }
 
+.zmiti-index-main-ui .zmiti-check-btn {
+  width: 120px;
+  height: 40px;
+  background: #3390ff;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
 .zmiti-index-main-ui .zmiti-submit-btn {
   width: 120px;
   height: 40px;
