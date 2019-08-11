@@ -171,18 +171,18 @@ var zmitiUtil = {
 		
 	},
 
-	listener(uid,tk){
+	listener(uid, tk) {
 
-		var { userid ,token} = this.getUserInfo().ui;
+		var { userid, token } = this.getUserInfo().ui;
 
-		if(!userid || !token){
+		if (!userid || !token) {
 			userid = uid;
 			token = tk;
 		}
-		if (this.socket){
+		if (this.socket) {
 			return;
 		}
-		
+
 		var socket = new WebSocket("ws://newapi.zmiti.com:50294");
 
 		socket.onopen = function () {
@@ -193,15 +193,15 @@ var zmitiUtil = {
 		this.socket = socket;
 		this.heart();
 
-		socket.onmessage =  (evt)=> {
+		socket.onmessage = (evt) => {
 			var data = JSON.parse(evt.data);
-			console.log(data);
-			if(data.getret === 0){
+			console.log(data, 'onmessage');
+			if (data.getret === 0) {
 
 				switch (data.action) {
 					case 0:
 					case 9995:
-						//提示并退出
+
 						break;
 					case 90000001:
 						Vue.obserable.trigger({
@@ -209,7 +209,6 @@ var zmitiUtil = {
 						});
 						break;
 					case 90000002:
-						alert('登录成功');
 						break;
 					case 500:
 						this.heart();
@@ -218,8 +217,12 @@ var zmitiUtil = {
 						break;
 				}
 			}
+			if (data.getret === 9995 || data.getret === 9994) {
+				window.localStorage.clear();
+				window.location.href = window.location.href.split('#')[0];
+			}
 		};
-		
+
 	},
 
 	getProductList(fn) { //
