@@ -78,7 +78,6 @@ $baseColor:#3390ff;
 		&.toast-enter,
 		&.toast-leave-to {
 			@include transform(translateY(-100%));
-			
 		}
 	}
 }

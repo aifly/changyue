@@ -1,0 +1,67 @@
+@import "../css/base.scss";
+.zmiti-check-sensitive-words-C{
+	width:600px;
+	height:400px;
+	background:#fff;
+	@include displayFlex(column);
+	
+	@include pos(a);
+	left:50%;
+	top:50%;
+	z-index:124;
+	margin:-200px 0 0 -300px;
+	.zmiti-check-result-header{
+		height:36px;
+		line-height:36px;
+		color:#fff;
+		background:#4784be;
+		@include pos(r);
+		text-indent:1em;
+		cursor:move;
+		span{
+
+		}
+		.zmiti-check-close{
+			@include pos(a);
+			right:0;
+			font-size:24px;
+			width:36px;
+			height:36px;
+			
+			cursor:pointer;
+		}
+	}
+	.zmiti-check-result-content{
+		flex:1;
+		border:1px solid #ddd;
+		box-sizing:border-box;
+		overflow:auto;
+		overflow-x:hidden;
+		padding:0 10px;
+		img{
+			width:100%;
+			height:auto;
+		}
+	}
+
+	footer{
+		width:100%;
+		height:50px;
+		line-height: 50px;
+		background:#ccc;
+		@include displayFlex(row);
+		justify-content:center;
+		align-items:center;
+		div{
+			background:#4784be;
+			width:100px;
+			cursor: pointer;
+			height:32px;
+			line-height: 32px;
+			text-align:center;
+			color:#fff;
+			margin:0 10px;
+			
+		}
+	}
+}

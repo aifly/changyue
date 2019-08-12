@@ -2,7 +2,7 @@
 	"manifest_version":2,
 	"version":"1.0.0",
 	"name":"畅阅",
-	"description":"CMS文章审核插件~",
+	"description":"CMS文章审核插件",
 	"page_action": {
 		"default_title": "__MSG_APP_NAME__",
 		"default_popup": "index.html",

@@ -76,12 +76,95 @@
 				this.timer = setTimeout(() => {
 					this[data.type] = '';
 				}, data.duration||2000);
-			})
+			});
+
+			obserable.on('togglePlugin',(data)=>{
+
+				return;
+				if(data.value === 'none'){
+					var html = `
+						<div class='zmiti-check-sensitive-words-C' >
+							<header class='zmiti-check-result-header'>
+								<span>检查结果</span>
+								<span class='zmiti-check-close'>&times;</span>
+							</header>
+							<div class='zmiti-check-result-content zmiti-scroll'>
+								${data.html}
+							</div>
+							<footer>
+								<div class='zmiti-check-btn'>确定</div>
+								<div class='zmiti-check-btn'>取消</div>
+							</footer>
+						</div>
+					`
+
+
+					document.body.innerHTML+= html;
+					document.querySelector('.zmiti-check-btn').addEventListener('click',()=>{
+
+						obserable.trigger({
+							type:"togglePlugin",
+							data:{
+								value:'block'
+							}
+						})
+					});
+					var dragObj = document.querySelector('.zmiti-check-result-header');
+					var container = document.querySelector('.zmiti-check-sensitive-words-C');
+					var isCanMove = false;
+					var disX = 0, disY = 0;
+					var startX = 0,startY = 0;
+					dragObj.onmousedown = function(e){
+						 disX = e.pageX - this.offsetLeft;
+						 disY = e.pageY - this.offsetTop;
+						isCanMove = true;
+						e.preventDefault();
+					}
+
+					document.onmousemove = function(e){
+						if( isCanMove ){
+							var x = e.pageX - disX + startX;
+							var y = e.pageY - disY + startY;
+							container.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+						}
+					}
+					document.onmouseup = function(e){
+						var x = e.pageX - disX + startX;
+						var y = e.pageY - disY + startY;
+						startX = x;
+						startY = y;
+						isCanMove = false;
+
+						e.preventDefault();
+					}
+					document.querySelector('.zmiti-check-close').addEventListener('click',()=>{
+						obserable.trigger({
+							type:"togglePlugin",
+							data:{
+								value:'block'
+							}
+						})
+					})
+				}
+				else{
+
+					document.body.removeChild(document.querySelector('.zmiti-check-sensitive-words-C'));
+				}
+
+				document.querySelector("#changyue-app1").classList[data.value === 'none'?'add':'remove']('hide');
+
+			});
         },
         watch:{
              
         },
 		methods:{
+			getHtml(){
+				var frame = document.querySelector('#_trs_editor_');
+				var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
+				var html = content.innerHTML.replace(/孙茂芳/ig,'<span style="color:#f00">孙茂芳</span>');
+				return html;
+			},
 			closeAll(){//移除整个插件~~~
 				document.body.removeChild(document.querySelector("#changyue-app1"));
 			}
