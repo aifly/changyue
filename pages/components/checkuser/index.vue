@@ -29,7 +29,7 @@
 
 <style lang="scss" scoped>
 	@import './index.scss';
-</style>
+</style>	
 
 <script>
 	import zmitiUtil from '../../common/lib/util';

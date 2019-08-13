@@ -40,7 +40,7 @@
 			</ul>
 		</div>
 
-		<div class='zmiti-check-sensitive-words-C' v-if='html' :style="{transform:'translate('+x+'px,'+y+'px)'}">
+		<!-- <div class='zmiti-check-sensitive-words-C' v-if='html' :style="{transform:'translate('+x+'px,'+y+'px)'}">
 		<header ref='header' class='zmiti-check-result-header'>
 			<span>检查结果</span>
 			<span class='zmiti-check-close'>&times;</span>
@@ -51,7 +51,10 @@
 		<footer>
 			<div class='zmiti-check-btn'>确定</div>
 			<div class='zmiti-check-btn'>取消</div>
-		</footer>
+		</footer> 
+	</div>-->
+	<div  v-if='html'>
+		<checksensitivewords :html='html' @closeDialog='closeDialog'></checksensitivewords>
 	</div>
 	</div>
 </template>
@@ -64,6 +67,7 @@
 <script>
 	import zmitiUtil from '../../common/lib/util';
 	var {cityActions,weatherActions,userActions} = zmitiUtil; 
+	import checksensitivewords from '../checksensitivewords/index.vue';
 	import Vue from 'vue';
 	var json = {};
 	export default {
@@ -71,12 +75,28 @@
 		name:'zmitiindex',
 		data(){
 			return{
+
 				html:'',
 				x:0,
-				y:0
+				y:0,
+				sensitivewords:[
+					{
+						wordname:"新华社",
+						rank:1
+					},
+					{
+						wordname:"习近平",
+						rank:1
+					},
+					{
+						wordname:"总理",
+						rank:1
+					},
+				]
 			}
 		},
 		components:{ 
+			checksensitivewords
 		},
 
 		beforeCreate(){
@@ -85,7 +105,7 @@
 		watch:{
 			html(val){
 				if(val){
-					this.initDrag();
+					//this.initDrag();
 				}
 			}	
 		},
@@ -100,54 +120,33 @@
 		
 		methods:{
 
-			initDrag(){
-				setTimeout(() => {
-					
-					var dragObj = this.$refs['header'];
-						var container = document.querySelector('.zmiti-check-sensitive-words-C');
-						var isCanMove = false;
-						var disX = 0, disY = 0;
-						var startX = 0,startY = 0;
-						var s = this;
-						dragObj.onmousedown = function(e){
-							 disX = e.pageX - this.offsetLeft;
-							 disY = e.pageY - this.offsetTop;
-							isCanMove = true;
-							e.preventDefault();
-						}
-	
-						document.onmousemove = function(e){
-							if( isCanMove ){
-								var x = e.pageX - disX + startX;
-								var y = e.pageY - disY + startY;
-								s.x = x;
-								s.y = y;
-							}
-						}
-						document.onmouseup = function(e){
-							var x = e.pageX - disX + startX;
-							var y = e.pageY - disY + startY;
-							startX = x;
-							startY = y;
-							isCanMove = false;
-	
-							e.preventDefault();
-						}
-				}, 120);
+			closeDialog(){
+				this.html = '';
 			},
+			
 			getSensitiveWords(){
 
+				
 				var frame = document.querySelector('#_trs_editor_');
 				var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
-				var html = content.innerHTML.replace(/孙茂芳/ig,'<span style="color:#f00">孙茂芳</span>');
+
+				var html =  content.innerHTML;
+				var json = {};
+				this.sensitivewords.forEach((item)=>{
+					var keywords =  new RegExp(item.wordname,'ig');
+					json[item.wordname] = json[item.wordname]||{};
+					var res = html.match(keywords);
+					json[item.wordname].num = res.length;
+					html = html.replace(keywords,'<span style="color:#f00;text-decoration:underline">'+item.wordname+'</span>');
+				});
+
 				this.html = html;
 
-				return;
+				
 				Vue.obserable.trigger({
 					type:'togglePlugin',
 					data:{
 						value:'none',
-						html
 					}
 				}); 
 				/* */

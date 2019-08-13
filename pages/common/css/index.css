@@ -221,6 +221,7 @@ h2.zmiti-title {
 
 #changyue-app1.hide {
   opacity: 0;
+  position: relative;
 }
 
 .zmiti-check-sensitive-words-C {

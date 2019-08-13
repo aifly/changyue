@@ -218,6 +218,7 @@ h2.zmiti-title{
 
 	&.hide{
 		opacity:0;
+		@include pos(r);
 	}
 
 }
