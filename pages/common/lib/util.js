@@ -186,7 +186,7 @@ var zmitiUtil = {
 		var socket = new WebSocket("ws://newapi.zmiti.com:50294");
 
 		socket.onopen = function () {
-			var json = JSON.stringify({ action: 10000000, ui: { userid: userid, token: token } })
+			var json = JSON.stringify({ type:3,action: 10000000, ui: { userid: userid, token: token } })
 			socket.send(json);
 		};
 

@@ -213,7 +213,8 @@
 					data:{
 						action:userActions.userLogin.action,
 						username,
-						password
+						password,
+						type:3//插件登录
 					},
 					success(data){
 					
