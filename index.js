@@ -27,7 +27,16 @@ Vue.host = host;
 /*import VueTouch from 'vue-touch';
 Vue.use(VueTouch, {name: 'v-touch'})*/
 
-  
+var ips = [
+	'172.27.2.167',
+	'172.27.2.197',
+	'172.27.2.201',
+	'172.27.2.202',
+	'172.27.2.168',
+	'172.27.2.203',
+	'172.27.2.204',
+];
+
 chrome.extension &&
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	//console.log(frame,'frame');
@@ -41,9 +50,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	
 	var content  = frame.contentWindow.document.getElementById('TRS_Editor___Frame').contentWindow.document.querySelector('#xEditingArea iframe').contentWindow.document.querySelector('.TRS_Editor');
 	zmitiObj.content = content.innerHTML; */
-	console.log(request);
-	sendResponse(123);
-	init();
+	if (zmitiUtil.getQueryString('DocumentId') && zmitiUtil.getQueryString('FromEditor')){
+		sendResponse(123);
+		init();
+	}
 });
 
 

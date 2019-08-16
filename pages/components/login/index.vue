@@ -19,7 +19,7 @@
 						<input type="password" v-model='password' placeholder="智媒体密码" @keydown.13='login'/>
 					</div>
 					<div class='zmiti-login-error'>{{errMsg}}</div>
-					<div class='zmiti-login-btn' @click='login'>登录</div>
+					<div class='zmiti-login-btn' :class="{'active':showLoading}" @click='login'>登录</div>
 				</template>
 				<template v-else>
 					<div class='zmiti-login-qrcode'>
@@ -80,6 +80,7 @@
 				qrCodePageIndex:-1,
 				errMsg:"",
 				loginType:0,
+				showLoading:false,
 				viewH:document.documentElement.clientHeight,
 				username:window.localStorage.getItem('cy-username'),
 				password:window.localStorage.getItem('cy-password')
@@ -208,6 +209,7 @@
 			login(){
 				var {username,password} =this;
 				var s= this;
+				this.showLoading = true;
 				zmitiUtil.ajax({
 					remark:'login',
 					data:{
@@ -217,7 +219,8 @@
 						type:3//插件登录
 					},
 					success(data){
-					
+
+						s.showLoading = false;
 						if (data.getret === 0 || data.getret === 100) {
 							window.localStorage.clear();
 							window.localStorage.setItem('login', JSON.stringify(data));

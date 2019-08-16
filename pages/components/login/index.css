@@ -217,4 +217,26 @@
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
+  position: relative;
+}
+
+.zmiti-login-C .zmiti-login-form .zmiti-login-btn.active:after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  border-left: none;
+  top: 9px;
+  margin-left: 4px;
+  -webkit-animation: rotate 1s linear infinite;
+  animation: rotate 1s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

@@ -200,6 +200,30 @@
 				cursor: pointer;
 				user-select: none;
 				-webkit-user-select: none;
+				@include pos(r);
+
+				&.active{
+					
+					&:after{
+						content:'';
+						width: 14px;
+						height: 14px;
+						@include br();
+						border:1px solid #fff;
+						@include pos(a);
+						border-left: none;
+						top: 9px;
+						margin-left: 4px;
+						@include animation(rotate 1s linear infinite)
+					}
+
+				}
+			}
+
+			@-webkit-keyframes rotate{
+				to{
+					@include transform(rotate(360deg));
+				}
 			}
 		}
 
