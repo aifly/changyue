@@ -3,7 +3,7 @@
 		<div class='zmiti-login-C'>
 			<h2 class='zmiti-title'>登录</h2>
 			<div class='zmiti-icon'>
-				<img src="chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/logo.png" alt="">
+				<img src="http://h5.zmiti.com/public/changyue/assets/images/logo.png" alt="">
 			</div>
 
 			<div class='zmiti-login-form'>
@@ -52,8 +52,8 @@
 						
 					</div>
 					<div class='zmiti-logo'>
-						<img v-if='qrCodePageIndex === 0' src="chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/logo.png" alt="">
-						<img v-else src="chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/images/zxm.png" alt="">
+						<img v-if='qrCodePageIndex === 0' src="http://h5.zmiti.com/public/changyue/assets/images/logo.png" alt="">
+						<img v-else src="http://h5.zmiti.com/public/changyue/assets/images/zxm.png" alt="">
 					</div>
 					<div class='zmiti-sms-tip' v-if='qrCodePageIndex === 0'>我不想关注，只用手机短信接收信息</div>
 				</div>
@@ -183,7 +183,7 @@
 					return;
 				}
 				this.getWXCode(function(info){
-				
+					console.log(info)
 					zmitiUtil.getTempToken(info.token);
 					s.$refs['loginqrcode'].innerHTML = '';
 					zmitiUtil.createQrCode(s.$refs['loginqrcode'],info.url,170);

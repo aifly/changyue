@@ -114,6 +114,9 @@ var zmitiUtil = {
 	},
 
 	heart(){
+		if (!this.getUserInfo()){
+			return;
+		}
 		var { userid, token } = this.getUserInfo().ui;
 		var { socket} = this;
 		setTimeout(() => {

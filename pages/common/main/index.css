@@ -6,8 +6,8 @@
 }*/
 @font-face {
   font-family: 'zmt_iconfont';
-  src: url("chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.eot?hkkay8");
-  src: url("chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.eot?hkkay8#iefix") format("embedded-opentype"), url("chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.ttf?hkkay8") format("truetype"), url("chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.woff?hkkay8") format("woff"), url("chrome-extension://ccaajbldnogccgckclndmioalfneplic/assets/fonts/iconfont.svg?hkkay8#iconfont") format("svg");
+  src: url("http://h5.zmiti.com/public/changyue/assets/assets/fonts/iconfont.eot?hkkay8");
+  src: url("http://h5.zmiti.com/public/changyue/assets/assets/fonts/iconfont.eot?hkkay8#iefix") format("embedded-opentype"), url("http://h5.zmiti.com/public/changyue/assets/assets/fonts/iconfont.ttf?hkkay8") format("truetype"), url("http://h5.zmiti.com/public/changyue/assets/assets/fonts/iconfont.woff?hkkay8") format("woff"), url("http://h5.zmiti.com/public/changyue/assets/assets/fonts/iconfont.svg?hkkay8#iconfont") format("svg");
   font-weight: normal;
   font-style: normal;
 }
