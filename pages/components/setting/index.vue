@@ -113,13 +113,23 @@
 			},
 			 getCMSList(){
 				 var s = this;
+				 var company = zmitiUtil.getCurrentCompanyId();
+				 var companyid;
+				 if(company){
+					 companyid = company.companyid;
+				 }
+				 var productid = zmitiUtil.productid;
 				 zmitiUtil.ajax({
 					 remark:"getCMSList",
 					 data:{
 						 action:userActions.getCMSList.action,
 						 condition:{
 							 page_size:10,
-							 page_index:0
+							 page_index:0,
+							 companyid,
+							 productid
+
+
 						 }
 					 },
 					 success(data){

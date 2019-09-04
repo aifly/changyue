@@ -2,7 +2,7 @@
 
 
 chrome.contextMenus.create({
-	"title": '提交审核',
+	"title": '智媒体畅阅',
 	"type": "normal",
 	"contexts": ["page", "frame", "selection"],
 	"onclick": function (info, tab) {
